@@ -1,0 +1,39 @@
+---@meta
+
+---@class FWater_Caustics_Parameters
+---@field WaterCausticsType_10_22E9DB2B44EBA1DDFCD669BFC4F5A2C3 FString
+---@field WaterCausticsBufferScale_11_4891F1C1433E69AD7AE583B26CB8B74F FString
+---@field WaterCausticsRefractiveIntensity_12_84E7671A4C1BAFCE5A912E8B9D549C41 FString
+---@field WaterCausticsReflectiveIntensity_13_A8FAED5646D272D518F78DBF2EC3FFF3 FString
+---@field WaterCausticsFresnelBaseReflectFraction_23_28BA9C044FF67107897D8E983B459690 FString
+---@field WaterCausticsMapSizeX_24_0DD69E77451F51BCA32B16A0B271FC6C FString
+---@field WaterCausticsMapSizeY_25_5995CB844729B31103795D9CACF0CF3E FString
+---@field WaterCausticsNumDenoisePasses_26_5FDE5D6146B749E8B952F89B329F61B2 FString
+---@field WaterCausticsMinReflectionRayDistance_27_45097790417E6E7F541B1382E5A0C9AA FString
+---@field WaterCausticsMaxReflectionRayDistance_28_67F4322D4AF3ACF0CD8B2895974A115B FString
+---@field WaterCausticsMinRefractionRayDistance_29_E9C281484F546DBCAF69C5A7866FD0B2 FString
+---@field WaterCausticsMaxRefractionRayDistance_30_3B0E91A54E9D4AD25FCDD18B13E2A9EB FString
+---@field WaterCausticsRectLightTemporalWeight_32_6729E6744212BBA47350FDB9D6743EF6 FString
+---@field WaterCausticsRefractBackFaceCullingThreshold_33_7EC526954286067A65F5C7A1F3F7A71A FString
+---@field WaterCausticsReflectBackFaceCullingThreshold_36_16DE876A4587F2728ED6C2BA6FD54C98 FString
+---@field WaterCausticsMapCascades_48_C35E153E4FD3359DF08CED8FD8911D43 FString
+---@field WaterCausticsMapCascadeScale_47_59ED42134835FEEF0A3586B7A60856F1 FString
+---@field WaterCausticsMapForceLevel_51_4FE7525E45C9D08EA0F96D8388F5BFF6 FString
+---@field WaterCausticsShowPhoton_46_B3215C834DEFE8DC5DA4A6A8F292D91D FString
+---@field WaterCausticsPhotonScale_54_1E5BBCA644165B132F85C78276BB702F FString
+---@field WaterCausticsCascadeSamplingOffsetX_61_2719694E494E4EB376BB5DAF45921638 FString
+---@field WaterCausticsCascadeSamplingOffsetY_63_98AADADD45FD2ED6D43DC0ADDEC6C53A FString
+---@field WaterCausticsCascadeSamplingUVScaleX_64_3141DE974ACBDD26008C3E8B72619B44 FString
+---@field WaterCausticsCascadeSamplingUVScaley_65_A879211B4B47DBCDA46BE4A1A4A3F47D FString
+---@field UseSceneLightDir_68_7B35F1EA4CDF9B9D16F068BF886419AF FString
+---@field WaterCausticsReflectiveNormalScale_72_8E7BE7F040BCAA5474D9C58BBEB1FEC7 FString
+---@field WaterCausticsRefractiveNormalScale_75_11BB4FDF492EC51614A427BC18CFF5B0 FString
+---@field WaterCausticsViewCulling_80_F608F01E4E5DAAE17E8D7B935E7F82DC FString
+---@field WaterCausticsEnableShadowRay_85_CD902F404203091E5DF9C5842CB306D6 FString
+---@field WaterCausticsShadowRayMaxDistance_86_3F679E3E4D7596B2D597F59985A5ABEE FString
+---@field WaterCausticsEpsilonArea_89_CA86C4EA4576D49218C593A01A6D5E73 FString
+---@field UseAdaptiveWaterCausticsMapResolution_77_A47539CC44ACAA1663FE2FBB69A479C6 boolean
+FWater_Caustics_Parameters = {}
+
+
+

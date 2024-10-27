@@ -1,0 +1,31 @@
+---@meta
+
+---@class FLumen
+---@field LumenHWRayTracing_2_145DF82742C3EF8CB5D17EA203F8040D FString
+---@field LumenHWLightingMode_23_36B8098749009A0C2FA2B684309A387F FString
+---@field LumenReflectionsAllow_24_B267C9BC4D88FFD0AAFD3FB98D6ADB62 FString
+---@field LumenHWReflections_25_89D57A95439A749030DD5ABDFEE9A4BE FString
+---@field LumenReflectionsMaxRoughnessToTrace_26_ADF13EDC4D4722E02F288DA06B382620 FString
+---@field LumenHWReflectionsTraceTranslucent_27_CE11651845352F91DBC58298DA95E215 FString
+---@field LumenHWReflectionsTraceTranslucentMaxHitCount_28_EE15039B4C375AB99D763FB15AA4D212 FString
+---@field LumenHWReflectionsTraceTranslucentTMax_29_E66CD8994237D80B7DFDF5B5F7DA251E FString
+---@field LumenHWReflectionsTraceTranslucentTMin_30_F2A7C4C94BC3E812B4A725AA88B8C009 FString
+---@field LumenHWReflectionsTraceTranslucentType_31_4358618D4B5206A00666ECB1787A7912 FString
+---@field LumenTranslucencyReflectionsFrontLayerAllow_32_355DDCC64AEDFD3919F9A992394E417A FString
+---@field LumenTranslucencyReflectionsFrontLayerEnable_33_CCE5EA7B422D2D1D4A5C26BAA57747AF FString
+---@field LumenDiffuseIndirectAllow_34_C81E8C3540F76B1C45E643804259B754 FString
+---@field LumenSceneFarField_35_28808D544141F0D827F4558A8BD48502 FString
+---@field ScreenProbeGatherScreenTraces_36_32D5613B48D605F8D9064ABF78CAD21B FString
+---@field LumenSceneRadiosity_37_E2594D394CA7E5DDB3A6BF947E6D31A3 FString
+---@field LumenVisualizeCardPlacement_38_65ACF23F40E1CEAB97E6DBB5526BCED2 FString
+---@field LumenReflectionsScreenTraces_39_1D390A3344C4626A8E0C158EEF36D6BA FString
+---@field DynamicGlobalIlluminationMethod_40_FA6DC361420561E07450B1A8A566A119 FString
+---@field ReflectionMethod_41_690336D445178C33A1330B8EEB61A2E3 FString
+---@field ReflectionsMaxRoughnessToTraceForFoliage_42_85F9D09A48CFD2C2A167CA9AD3D41E38 FString
+---@field LumenReflectionSER_47_7D33229E48C56701DDB61FBC8C351288 FString
+---@field LumenScreenProbeGatherSER_48_E7787DF645157E021672B28CDEE73BCF FString
+---@field LumenRadianceCacheSER_49_6778EFFC47B34054B65DCC805B3DA684 FString
+FLumen = {}
+
+
+

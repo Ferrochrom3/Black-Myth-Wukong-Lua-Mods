@@ -1,0 +1,24 @@
+---@meta
+
+---@class FRTXDI_NRD_Parameters
+---@field EnableRTXDI_2_4F8A33CA4FCF7AF48FE0CDA92D2DD102 FString
+---@field EnableNRD_4_6B53E8CA4BF8DF54FFB76EA8EFB6A046 FString
+---@field RTXDIQuality_7_0F125504431980E0E4E1EFAE5DDAB930 RTXDI_Quality::Type
+---@field DiffuseIndirectTechnique_18_A24067A240B8AF3AA87D2181A5BC31E4 FString
+---@field RelaxAtrousDiffuseLobeAngleFraction_19_9C47121C4CC50BD7374452B280354527 FString
+---@field RelaxAtrousDiffuseMinLuminanceWeight_20_DB069B4B4BA42F200349B0AE4BE65805 FString
+---@field RelaxAtrousDiffusePhiLuminance_21_6252DC5F4FA5E29183C69CB0E3D7B6E2 FString
+---@field RelaxAtrousIterations_22_7932BA1246CF015EFCD8DA9C42FDC30B FString
+---@field RelaxFireflySupression_26_609531234D829DF68DA4279261FFE10A FString
+---@field RelaxHistoryFixFrameNum_28_AFE117F94A3DCB859D0D3CB681AFE28D FString
+---@field RelaxDiffuseFastMaxAccumulatedFrameNum_33_E8FC05574F4C2BD03B40F2ADF7E93CDD FString
+---@field RelaxDiffuseMaxAccumulatedFrameNum_34_D1DB12E24B16CE4BEE4DC492A5C0EE7A FString
+---@field RelaxDisocclusionThreshold_35_885B06B8460E41131CF20183FBC9DD4E FString
+---@field SpecularLobeAngleFraction_39_83B56E2640095BA1DDADAAA689FFF072 FString
+---@field SpecularBlurRadius_40_70889B2849C889FB785735B1D2DA1CE3 FString
+---@field SpecularLobeAngleSlack_43_3ECCC53445E00A433843FF9083B002A7 FString
+---@field SpecularMinLuminanceWeight_46_B2CAE1DC4B520854F7A84BACCF4FFE1E FString
+FRTXDI_NRD_Parameters = {}
+
+
+

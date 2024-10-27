@@ -1,0 +1,29 @@
+---@meta
+
+---@class FMesh_Caustics_Parameters
+---@field EnableMeshCaustics_11_EF17A54E4000730673FD55AFA7851310 FString
+---@field MeshCausticsResolution_12_8CBAF5AD40511B86FFECDBBE10551070 FString
+---@field MeshCausticsBufferScale_13_82AC6AEE4DE3DABA0E6EF8AFC173099A FString
+---@field MeshCausticsTemporalStrength_14_53019FA5437B781E8F3DCDA3EAA12347 FString
+---@field MeshCausticsJitter_15_A7EFA23F493F73491A338F833DD71740 FString
+---@field MeshCausticsEnableDispersion_16_D1059E664DB569A0DCD2868ED0E410C0 FString
+---@field MeshCausticsTranslucentReflectionMode_57_234A3311428BB4FD6186D485A258D216 FString
+---@field MeshCausticsMaxTraceDepth_18_E5DFC534448262757F618C984430031B FString
+---@field MeshCausticsAdaptivePhotonSize_19_75A570FD45DDB1FFB198EAB522F1327C FString
+---@field MeshCausticsEnableTemporalFilter_20_B10DF55042CC5EB4BBBD3C9029E72D25 FString
+---@field MeshCausticsAdaptiveSmooth_26_B237A3464D57ACD60A63CEB0E381F8AF FString
+---@field MeshCausticsAdaptiveUpdateSpeed_27_EBAA130A425D904E6219BC847C5D4E7E FString
+---@field MeshCausticsAdaptiveVarianceGain_28_D612A8F64E9A6BB74AD5D0A9FC85241B FString
+---@field MeshCausticsFixedLight_29_9C6912304FA41791E112799EF9B09B26 FString
+---@field MeshCausticsMaxIntensity_30_0571085B49EBB70A2506CC898A54B72E FString
+---@field MeshCausticsSoftCausticsSample_34_23B75C3A4673EC4C06FB7380A1AFC77B FString
+---@field MeshCausticsEnableAdvancedSoftCaustics_40_EF539D7E4B254D3FF7354499EA1ADA17 FString
+---@field MeshCausticsMidCullColorThreshold_46_603884CE4A61EB477D7D2C82EFE3E844 FString
+---@field MeshCausticsFinalCullColorThreshold_47_ADE4A81B4FC53161666873B6CE1C1E16 FString
+---@field MeshCausticsIntensity_50_8E96F81D40BC087613695CBE1946AD28 FString
+---@field MeshCausticsMaxRayDistance_53_7A78E57D4BA078EDB6381A846432F21C FString
+---@field MeshCausticsTemporalColorTolerance_56_C9E20A13401A4696C5D960922F2ED319 FString
+FMesh_Caustics_Parameters = {}
+
+
+

@@ -1,0 +1,74 @@
+---@meta
+
+---@class AUnit_Player_Wukong_C : ABP_PlayerBase_C
+---@field UberGraphFrame FPointerToUberGraphFrame
+---@field soulskill_fur_3 UTressFXComponent
+---@field soulskill_fur_2 UTressFXComponent
+---@field soulskill_fur_1 UTressFXComponent
+---@field Collision_MF UCapsuleComponent
+---@field LODSyncComp ULODSyncComponent
+---@field FoliageCollision UCapsuleComponent
+---@field head_hair UStaticMeshComponent
+---@field PointLight1 UPointLightComponent
+---@field PointLight UPointLightComponent
+---@field DummyMesh20 USkeletalMeshComponent
+---@field PhysicalAnimation UPhysicalAnimationComponent
+---@field BGUAnimationSync UBGUAnimationSyncComponent
+---@field DummyMesh USkeletalMeshComponent
+---@field ImpactActionCheck UCapsuleComponent
+---@field ChildActorUpwear UChildActorComponent
+---@field Collision_Repel UCapsuleComponent
+---@field Collision_Circle UCapsuleComponent
+---@field Collision_Root UCapsuleComponent
+---@field AssistCollision_Left UBoxComponent
+---@field AssistCollision_Right UBoxComponent
+---@field AssistCollision_Behind UBoxComponent
+---@field AssistCollision_Front UBoxComponent
+---@field bodypart_weiba USkeletalMeshComponent
+---@field bodypart_hulu USkeletalMeshComponent
+---@field FootAxisBR USceneComponent
+---@field FootAxisBL USceneComponent
+---@field Collision_PreciseDodge UCapsuleComponent
+---@field bodypart_arm USkeletalMeshComponent
+---@field bodypart_head USkeletalMeshComponent
+---@field bodypart_weapon USkeletalMeshComponent
+---@field bodypart_foot USkeletalMeshComponent
+---@field CurVelocity UArrowComponent
+---@field MaxVelocity UArrowComponent
+---@field bodypart_upwear USkeletalMeshComponent
+---@field SFadeObjects USFadeObjectsComponent
+---@field Arrow1 UArrowComponent
+---@field HasAddLeaveBattleBuff boolean
+---@field LeaveBattleTime double
+---@field HadSendSpawnOldMK boolean
+---@field TianBing04AliveNum int32
+---@field zSpeedBeforeLand double
+---@field Demo_CloudPlatformMeshScale FVector
+---@field Demo_CloudPlatformViewPitchMax double
+---@field Demo_CloudPlatformViewPitchMin double
+---@field bEnableInteractionParticles boolean
+---@field BuddyVisible boolean
+---@field NewVar_0 UObject
+---@field NewVar_1 UObject
+---@field NewVar_2 FName
+---@field BPUIDeathScreenReference UObject
+---@field Foot int32
+---@field NewVar_3 int32
+---@field FootIsInAir boolean
+---@field NewVar_4 TArray<AActor>
+---@field PressedQ FUnit_Player_Wukong_CPressedQ
+---@field PressedE FUnit_Player_Wukong_CPressedE
+---@field ReleasedQ FUnit_Player_Wukong_CReleasedQ
+---@field ReleasedE FUnit_Player_Wukong_CReleasedE
+AUnit_Player_Wukong_C = {}
+
+function AUnit_Player_Wukong_C:UpdateArrow() end
+function AUnit_Player_Wukong_C:DrawCam() end
+---@param EntryPoint int32
+function AUnit_Player_Wukong_C:ExecuteUbergraph_Unit_Player_Wukong(EntryPoint) end
+function AUnit_Player_Wukong_C:ReleasedE__DelegateSignature() end
+function AUnit_Player_Wukong_C:ReleasedQ__DelegateSignature() end
+function AUnit_Player_Wukong_C:PressedE__DelegateSignature() end
+function AUnit_Player_Wukong_C:PressedQ__DelegateSignature() end
+
+

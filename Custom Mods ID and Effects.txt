@@ -1,0 +1,158 @@
+BetterFanPin
+- Under "EquipDesc.data" find "AttrEffectId()" of 10501 - 10504
+    - IDs: 501 to 504
+- Go to "EquipAttrDesc.data" and find the IDs found in the previous step
+- Open Attr() and modify/add stat effects
+    - 501
+        - 45 DefBase
+        - 300 DmgDefBase
+    - 502
+        - 90 DefBase
+        - 600 DmgDefBase
+    - 503
+        - 47 DefBase
+        - 300 DmgDefBase
+    - 504
+        - 40 DefBase
+        - 300 DmgDefBase
+
+StrongerYinTiger
+- Go to "FUStBuffDesc-fr.data"
+- Find 14074 (【虎】变身-风状态 | 0.【属性】每1s-扣减变身能量：8)
+    - Open "BuffEffects()"
+        - Open "FUStBuffEffectAttr-0"
+            - Open "EffectParams"
+                - Change "Int32-1" value from -8 to 3 (+3 transformation energy every interval in wind mode, defaults to 1 second)
+    - Add new effect, now there should be a "FUStBuffEffectAttr-1"
+        - Open "FUStBuffEffectAttr-1"
+            - Set EffectTrigger to "OnSkillDamage"
+            - Set EffectType to "RecoverAttr"
+            - Open "EffectParams"
+                - Create 4 Int32 with values 151, 300, 0, 1 (now heal on damaging targets after using ability)
+    - Add new effect, now there should be a "FUStBuffEffectAttr-2"
+        - Open "FUStBuffEffectAttr-2"
+            - Set EffectTrigger to "BeAttacked"
+            - Set EffectType to "IncreasePevalue"
+            - Open "EffectParams"
+                - Add a new Int32 and change the value to 1
+            - Open "EffectParamsFloat"
+                - Add a new Int32 and change the value to 150 (now +150 Pevalue after getting hit in wind mode)
+
+StrongerStoneMonkey
+- Go to "FUStBuffDesc-fr.data"
+- Find "【猿】变身-自然恢复为0"
+    - Open "BuffEffects"
+        - Add a new "FUStBuffEffectAttr"
+            - Set "EffectTrigger" to "OnSkillDamage"
+            - Set "RecoverAttr"
+            - Open "EffectParams"
+                - Create 4 Int32 with values 151, 300, 0, 1 (now heal on damaging targets)
+        - Add a new "FUStBuffEffectAttr"
+            - Set "EffectTrigger" to "OnSkillDamage"
+            - Set "RecoverAttr"
+            - Open "EffectParams"
+                - Create 4 Int32 with values 188, 8, 0, 0 (now regen energy when damaging a target)
+
+BetterQingTianGourd
+- Go to "EquipDesc.data"
+- Find 18011 青田葫芦
+    - Keep track of "AttrEffectId()" (8011)
+
+- Go to "EquipAttrDesc.data"
+- Find previously found ID (8011)
+    - Open Attr()
+        - Open "EffectAttrCfg-0"
+            - Change "Value" to 2 (now can drink 2 times)
+        - Add a new "EffectAttrCfg" and open it
+            - Change "Type" to "DmgDefBase"
+            - Change "Value" to 1000 (now grants 10% damage reduction)
+        - Add a new "EffectAttrCfg" and open it
+            - Change "Type" to "TenacityBase"
+            - Change "Value" to 20 (now grants 20 tenacity)
+
+MoreEffectsAfterSeeThrough
+- Go to "FUStBuffDesc-Talent.data"
+- Find 1004 劈棍GP成功Z2加棍势 (this only applies to Resolute Counterflow)
+    - Open "BuffEffects"
+        - Add a new "FUStBuffEffectAttr"
+            - Set "EffectTrigger" to "Generation"
+            - Set "EffectType" to "SpawnProjectile"
+            - Open "EffectParamsString"
+                - Add a new "String" with value "/Game/00Main/Design/Bullets/PlayerBullets/Wukong/Talent/BGW_Player_Wukong_Atk_yechawang.BGW_Player_Wukong_Atk_yechawang" (summon Yasaka King's groud spike)
+        - Add a new "FUStBuffEffectAttr"
+            - Set "EffectTrigger" to "Generation"
+            - Set "EffectType" to "SpawnProjectile"
+            - Open "EffectParamsString"
+                - Add a new "String" with value "/Game/00Main/Design/Bullets/PlayerBullets/Wukong/Talent/BGW_Player_Wukong_Atk_Feilonggun.BGW_Player_Wukong_Atk_Feilonggun" (summon Thunder Loong)
+
+- Find 1007 GP成功接连招标记Buff (this applies to both Resolute Counterflow and Tactical Retreat See Through effect)
+    - Open "BuffEffects"
+        - Add a new "FUStBuffEffectAttr"
+            - Set "EffectTrigger" to "Generation"
+            - Set "EffectType" to "SpawnProjectile"
+            - Open "EffectParamsString"
+                - Add a new "String" with value "BGWDataAsset_ProjectileSpawnConfig'/Game/00Main/Design/Bullets/LYS/LYS_KJLWoman/DA/BGW_LYS_KJLWoman_StarLaser.BGW_LYS_KJLWoman_StarLaser'" (summon Kang Jin Star's star laser)
+
+SpellbinderOnlyLockSpells
+- Go to "FuStBuffDesc-lz.data"
+- Find 156 禁字术沉默效果
+    - Open "BuffEffects" 
+        - Open "FUstBuffEffectAttr-0"
+            - Open "EffectParams"
+                - Remove 160, 170
+
+==============================Some Notes==============================
+
+How to make custom armor/weapon effects (this modifies set bonuses to inclued more effects)
+- Go to "FUStSuitDesc.data"
+- Locate the set bonus effect by name (Ex. 5 心灵福至 for FanPin)
+- Open SuitInfo()
+    - Add a new "FUStSuitInfo"
+    - Open the newly added "FUStSuitInfo"
+        - "TriggerNum" is how many pieces of that armor needs to be equipped to have the set bonus
+        - "AttrEffectID" should stay at 0
+        - "SuitEffectID" is the ID of a particular effect
+            - Ex. 900511 is FanPin set bonus, 105012 is 狼牙棒 effect. The ID can be weapon or armor, as long as the ID is an weapon/armor effect
+        - "SuitEffectDesc" is the description of the effect
+
+Double check modified values, the game save will be corrupted if values aren't acceptable
+    - Keep a back up if necessary before launching the game after mod is added
+
+
+Mods that modified the same .data file will not work together, they need to be merged
+
+==============================Currently In Use==============================
+
+BetterWukongSet
+- Go to "TalentSDesc.data"
+    - Find
+        - 907007 眼罩
+        - 105012 狼牙棒
+        - 303662 攻击命中时，额外获得棍势 (303662 is the max level spirit effect)
+        - (not used) 303671 受到攻击后的一段时间，增加伤害减免 (303671 is the max level spirit effect)
+
+- Go to "FUStSuitDesc.data"
+- Find 20 试比天高
+- Open SuitInfo()
+    - Add a new "FUStSuitInfo" and open it
+        - Change "TriggerNum" to 1
+        - Change "SuitEffectID" to 907007
+        - Change "SuitEffectDesc" to "更容易触发<EquipDetail_SuitDesc_KW>闪身</>"
+    - Add a new "FUStSuitInfo" and open it
+        - Change "TriggerNum" to 1
+        - Change "SuitEffectID" to 105012
+        - Change "SuitEffectDesc" to "识破对手攻击后，短时间内不断获得<EquipDetail_SuitDesc_KW>棍势</>"
+    - Add a new "FUStSuitInfo" and open it
+        - Change "TriggerNum" to 1
+        - Change "SuitEffectID" to 303662
+        - Change "SuitEffectDesc" to "攻击命中时，额外获得棍势"
+    - Add a new "FUStSuitInfo" and open it
+        - Change "TriggerNum" to 1
+        - Change "SuitEffectID" to 901612 (this comes from 16 百折不挠, pair this with RemoveDebuff.pak so dodge is available)
+        - Change "SuitEffectDesc" to "不再能触发闪身，但生命过半时，获得<EquipDetail_SuitDesc_KW>强硬</>效果"
+
+RemoveDebuff
+- Go to "FUStBuffDesc-Talent.data"
+- Find 2165 牛魔套4-霸体触发
+    - Open "BuffEffects"
+        - Remove "FUStBuffEffectAttr-1"
