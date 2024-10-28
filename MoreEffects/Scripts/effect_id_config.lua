@@ -20,9 +20,11 @@ local effect_id_table = {
     effect_StaffRedCharge = 731,    -- Staff glow effect
     effect_StaffOrangeCharge = 741, -- Staff glow effect
     effect_StaffYellowCharge = 742, -- Staff glow effect
+    effect_SeeThroughGoldFlash = 747,
 
-    combat_SeeThrough = 739,        -- Does not include immunity frames
-    combat_Immunity = 740,
+    combat_SeeThrough = 739,     -- Buff will be removed after getting hit and grants 740
+    combat_SeeThroughBuff = 740, -- Buffs added after a sucessful See Through (739), does not include immunity frames
+    combat_Immunity = 114,
 
     onHit_slowDownTime = 712,
 

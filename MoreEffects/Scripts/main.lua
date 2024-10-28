@@ -1,14 +1,21 @@
-local id_table             = require("effect_id_config")
-local stance_effects       = require("stance_effects")
-local improved_see_through = require("improved_see_through")
+local id_table                                            = require("effect_id_config")
+local stance_effects                                      = require("stance_effects")
+local stats_buff                                          = require("stats_buff")
 
-local player               = nil
-local library              = nil
+local player                                              = nil
+local library                                             = nil
 
+-- See Through
+local resolute_counterflow_see_through_effective_duration = 0.6   -- (default is 0.4s) In seconds, the time window for See Through to be activated after performing Resolute Counterflow
+local tactical_retreat_see_through_effective_duration     = 0.566 -- (default is 0.366s) In seconds, the time window for See Through to be activated after performing Tactical Retreat
 
-local function is_nil_or_invalid(obj)
-    return obj == nil or not obj:IsValid()
-end
+-- Stat buffs
+local damage_reduction_buff_amount                        = 1000 -- 10% increase (applied for See Through)
+local damage_reduction_buff_duration                      = 20   -- In seconds, how long the buff lasts after a successful See Through
+local damage_addition_buff_amount                         = 1000 -- 10% increase (applied for See Through)
+local damage_addition_buff_duration                       = 8    -- In seconds, how long the buff lasts after a successful See Through
+local health_regen_percentage                             = 0.06 -- Heal 6% of total health
+local mana_regen_percentage                               = 0.03 -- Regen 3% of total mana
 
 
 local function log_message(message)
@@ -34,15 +41,19 @@ local function get_library()
 end
 
 
+local function is_nil_or_invalid(obj)
+    return obj == nil or not obj:IsValid()
+end
+
 -- Add a buff to the player with a specified duration
--- The buff is provided by AttackEffectsLibrary.pak. Buffs are custom made in a .data file.
+-- The buff is provided by EffectsLibrary.pak. Buffs are custom made in .data files.
 --
 -- Note:
 -- 1. The duration value has to be least 1.
 -- 2. The buff duration in the .data file can be -1 for buffs that spawns projectiles.
 -- 3. If the buff is spawning projectiles and is time based, the buff will be activated (duration/interval + 1) times.
 -- 4. When the buff's EffectTrigger is OnSkillDamage, the duration must be long enough for the buff to trigger. If the duration is too long, the buff will be triggered per every damage instance until the duration is over.
-local function addBuff(buff_id, duration)
+local function add_buff(buff_id, duration)
     player = get_player()
     library = get_library()
 
@@ -50,6 +61,7 @@ local function addBuff(buff_id, duration)
         return
     end
 
+    ---@diagnostic disable-next-line: undefined-field
     library:BGUAddBuff(player, player, buff_id, 1, duration)
 end
 
@@ -61,48 +73,50 @@ local function register_skill_animation_hook()
         function(Context, Montage, PlayTimeRate, MontagePosOffset, StartSectionName, Reason)
             local montage_name = Montage:get():GetFullName()
 
-            -- 劈棍斩棍式, Skyfall Strike
+            -- 劈棍斩棍式
             if montage_name:find("AM_Wukong_ComboA_z_02") then
                 stance_effects.sky_fall_strike()
             end
 
-            -- 4豆蓄力劈棍. 4x Smash
+            -- 4豆蓄力劈棍
             if montage_name:find("xuli_attack_4") then
                 stance_effects.four_focus_smash()
             end
 
-            -- 戳棍进尺, Forceful Thrust
+            -- 戳棍进尺
             if montage_name:find("AM_wukong_combob_z_02") then
                 stance_effects.forceful_thrust()
             end
 
-            -- 4豆蓄力戳棍 4x Thrust
+            -- 4豆蓄力戳棍
             if montage_name:find("AM_Wukong_xuli_B_attack_4") then
                 stance_effects.four_focus_thrust()
             end
 
-            -- 风云转, Sweeping Gale
+            -- 风云转
             if montage_name:find("AM_wukong_comboc_z_01_start") then
                 stance_effects.sweeping_gale()
             end
 
-            -- 江海翻, Churning Gale
+            -- 江海翻
             if montage_name:find("AM_wukong_comboc_z_02") then
                 stance_effects.churning_gale()
             end
 
-            -- 4豆蓄力立棍, 4x Pillar
+            -- 4豆蓄力立棍
             if montage_name:find("AM_Wukong_Xuli_C_attack_4") then
                 stance_effects.four_focus_pillar()
             end
 
-            -- 棍花重击, Spinning Staff Heavy
+            -- 棍花重击
             if montage_name:find("AM_Wukong_ComboC_z_specialend") then
                 stance_effects.spinning_staff_heavy()
             end
 
             -- 5豆大圣模式蓄力
             if montage_name:find("xuli_attack_5") or montage_name:find("AM_wukong_trans_to_dasheng") then
+                if montage_name:find("xuli_attack_5") then stats_buff.activate_health_regen(0.08) end
+                stats_buff.activate_damage_reduction_buff(8000, 2)
                 stance_effects.five_focus_wukong_stance()
             end
 
@@ -164,7 +178,7 @@ local function register_skill_animation_hook()
             -- Used to ensure effects can be applied when entering a new zone in Wukong stance (use a light attack to activate this)
             if montage_name:find("_q") then
                 local BPPlayerController = FindFirstOf("BP_B1PlayerController_C")
-                player = BPPlayerController.pawn
+                player = BPPlayerController.pawn ---@diagnostic disable-line: undefined-field
             end
 
             -- elseif montage_name:find("AM_wukong_combob_z_01") then -- 戳棍退寸，搅棍准备开始，搅棍第一搅都会触发
@@ -179,44 +193,42 @@ local function register_buff_hook()
             -- =====Visual effects=====
             -- 主角劈棍，立棍，戳棍等级1表现
             if buff_id == 10821 or buff_id == 10841 or buff_id == 10861 then
-                addBuff(id_table.effect_GreatSageWeaponYellowShine, 1000)
+                add_buff(id_table.effect_GreatSageWeaponYellowShine, 1000)
             end
 
             -- 主角劈棍，立棍，戳棍等级2表现
             if buff_id == 10822 or buff_id == 10842 or buff_id == 10862 then
-                addBuff(id_table.effect_GreatSageWeaponOrangeShine, 1000)
+                add_buff(id_table.effect_GreatSageWeaponOrangeShine, 1000)
             end
 
             -- 主角劈棍，立棍，戳棍等级3表现（立棍几乎无视1和2等，会立马出红闪）
             if buff_id == 10823 or buff_id == 10843 or buff_id == 10863 then
-                addBuff(id_table.effect_GreatSageWeaponRedShine, 1000)
+                add_buff(id_table.effect_GreatSageWeaponRedShine, 1000)
             end
 
             -- =====Slightly longer See Through window and buffs after Seen Through=====
             -- Resolute Counterflow
             if buff_id == 287 then
-                Duration:set(improved_see_through.resolute_counterflow_see_through_effective_duration * 1000)
-                addBuff(id_table.combat_Immunity,
-                    improved_see_through.resolute_counterflow_see_through_effective_duration * 1000)
+                Duration:set(resolute_counterflow_see_through_effective_duration * 1000)
+                add_buff(id_table.combat_Immunity, resolute_counterflow_see_through_effective_duration * 1000)
             end
 
             -- Tactical Retreat
             if buff_id == 293 then
-                Duration:set(improved_see_through.tactical_retreat_see_through_effective_duration * 1000)
-                addBuff(id_table.combat_Immunity,
-                    improved_see_through.tactical_retreat_see_through_effective_duration * 1000)
+                Duration:set(tactical_retreat_see_through_effective_duration * 1000)
+                add_buff(id_table.combat_Immunity, tactical_retreat_see_through_effective_duration * 1000)
             end
 
-            -- -- Grant Damage Reduction after performing a sucessful See Through (either Resolute Counterflow or Tatical Retreat)
-            -- if buff_id == 288 or buff_id == 294 then
-            --     player = get_player()
-            --     library = get_library()
+            -- Add some stats after performing a sucessful See Through (custom See Through buff)
+            if buff_id == id_table.combat_SeeThroughBuff then
+                player = get_player()
+                library = get_library()
 
-            --     improved_see_through.activate_health_regen(player, library)
-            --     improved_see_through.activate_mana_regen(player, library)
-            --     improved_see_through.activate_damage_reduction_buff(player, library)
-            --     improved_see_through.activate_damage_addition_buff(player, library)
-            -- end
+                stats_buff.activate_health_regen(health_regen_percentage)
+                stats_buff.activate_mana_regen(mana_regen_percentage)
+                stats_buff.activate_damage_reduction_buff(damage_reduction_buff_amount, damage_reduction_buff_duration)
+                stats_buff.activate_damage_addition_buff(damage_addition_buff_amount, damage_addition_buff_duration)
+            end
 
             -- =====Dodge=====
             if buff_id == 10105 then     -- Slowed dodge (default 0.4s)

@@ -24,34 +24,19 @@ local function get_library()
 end
 
 
-local function IsNilOrInvalid(obj) return obj == nil or not obj:IsValid() end
+local function IsNilOrInvalid(obj)
+    return obj == nil or not obj:IsValid()
+end
 
 
--- Add a buff to the player with a specified duration
--- The buff is provided by AttackEffectsLibrary.pak. Buffs are custom made in a .data file.
---
--- Note:
--- 1. The duration value has to be least 1.
--- 2. The buff duration in the .data file can be -1 for buffs that spawns projectiles.
--- 3. If the buff is spawning projectiles and is time based, the buff will be activated (duration/interval + 1) times.
--- 4. When the buff's EffectTrigger is OnSkillDamage, the duration must be long enough for the buff to trigger. If the duration is too long, the buff will be triggered per every damage instance until the duration is over.
 local function add_buff(buff_id, duration)
     player = get_player()
     library = get_library()
 
     if IsNilOrInvalid(player) or IsNilOrInvalid(library) then return end
 
+    ---@diagnostic disable-next-line: undefined-field
     library:BGUAddBuff(player, player, buff_id, 1, duration)
-end
-
-
-local function removeBuff(buff_id)
-    player = get_player()
-    library = get_library()
-
-    if IsNilOrInvalid(player) or IsNilOrInvalid(library) then return end
-
-    library:BGURemoveBuff(player, buff_id, 1, 1)
 end
 
 
@@ -142,19 +127,7 @@ function stance_effects.five_focus_wukong_stance()
     add_buff(id_table.effect_BodyFire, 4600)
 
     add_buff(id_table.summon_StoneMonkeyFloatingRocks, 1000)
-
     add_buff(id_table.delayEffect_WukongStanceSmash, 5000)
-end
-
-function stance_effects.spinning_staff_start()
-end
-
-function stance_effects.spinning_staff_loop()
-    add_buff(id_table.effect_StaffYellowCharge, 20000)
-end
-
-function stance_effects.spinning_staff_stop()
-    removeBuff(id_table.effect_StaffYellowCharge)
 end
 
 function stance_effects.spinning_staff_heavy()
@@ -197,7 +170,7 @@ end
 -- Wukong stance light attack 2 followed by 1 heavy（挥，戳)
 function stance_effects.wukong_stance_combo_2_heavy_1()
     add_buff(id_table.combat_SeeThrough, 1000)
-    add_buff(id_table.combat_Immunity, 2000)
+    add_buff(id_table.combat_Immunity, 1000)
 
     add_buff(id_table.effect_StaffOrangeCharge, 3000)
     add_buff(id_table.effect_GreatSageWeaponOrangeShine, 300)
@@ -232,7 +205,7 @@ function stance_effects.wukong_stance_combo_3_heavy_2()
     add_buff(id_table.combat_Immunity, 1500)
 
     add_buff(id_table.effect_GreatSageWeaponRedShine, 100)
-    add_buff(id_table.effect_StaffRedCharge, 5000)
+    add_buff(id_table.effect_StaffRedCharge, 3000)
 
     add_buff(id_table.delayEffect_ChuringGale, 3000)
 end
