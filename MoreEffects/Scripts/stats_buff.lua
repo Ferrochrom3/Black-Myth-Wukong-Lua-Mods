@@ -112,12 +112,12 @@ function stats_buff.activate_health_regen(regen_amount)
         is_health_regened = true
 
         -- Get player max health and calculate the amount to regenerate
-        local playerMaxHealth = get_attribute(max_hp_id)
-        local healthRegenAmount = playerMaxHealth * regen_amount
+        local player_max_health = get_attribute(max_hp_id)
+        local health_regen_amount = player_max_health * regen_amount
 
         -- Apply health regen
-        current_hp = get_attribute(max_hp_id)
-        set_attribute(hp_id, current_hp + healthRegenAmount)
+        current_hp = get_attribute(hp_id)
+        set_attribute(hp_id, current_hp + health_regen_amount)
     end
 
     ExecuteWithDelay(500, function()
@@ -132,12 +132,12 @@ function stats_buff.activate_mana_regen(regen_amount)
         is_mana_regened = true
 
         -- Get player max mana and calculate the amount to regenerate
-        local playerMaxMana = get_attribute(max_mana_id)
-        local manaRegenAmount = playerMaxMana * regen_amount
+        local player_max_mana = get_attribute(max_mana_id)
+        local mana_regen_amount = player_max_mana * regen_amount
 
         -- Apply mana regen
-        current_mana = get_attribute(max_mana_id)
-        set_attribute(mana_id, current_mana + manaRegenAmount)
+        current_mana = get_attribute(mana_id)
+        set_attribute(mana_id, current_mana + mana_regen_amount)
     end
 
     ExecuteWithDelay(500, function()

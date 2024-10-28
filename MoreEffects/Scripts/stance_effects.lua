@@ -1,6 +1,7 @@
 local stance_effects = {}
 
 local id_table       = require("effect_id_config")
+local stats_buff     = require("stats_buff")
 
 local player         = nil
 local library        = nil
@@ -201,6 +202,8 @@ end
 
 -- Wukong stance light attack 3 followed by 2 heavies (江海翻)
 function stance_effects.wukong_stance_combo_3_heavy_2()
+    stats_buff.activate_damage_addition_buff(15000, 2)
+
     add_buff(id_table.combat_SeeThrough, 800)
     add_buff(id_table.combat_Immunity, 1500)
 
