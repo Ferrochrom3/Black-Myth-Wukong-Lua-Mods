@@ -66,7 +66,7 @@ local function get_attribute(attribute_id)
     if IsNilOrInvalid(player) or IsNilOrInvalid(library) then return 0 end
 
     ---@diagnostic disable-next-line: undefined-field
-    return library.GetAttrValue(player, attribute_id)
+    return library:GetAttrValue(player, attribute_id)
 end
 
 
@@ -85,7 +85,7 @@ function stats_buff.activate_damage_reduction_buff(buff_amount, buff_duration)
         ExecuteWithDelay(buff_duration * 1000, function()
             is_damage_reduction_applied = false
             current_damage_reduction = get_attribute(damage_reduction_id)
-            set_attribute(damage_reduction_id - buff_amount)
+            set_attribute(damage_reduction_id, current_damage_reduction - buff_amount)
         end)
     end
 end

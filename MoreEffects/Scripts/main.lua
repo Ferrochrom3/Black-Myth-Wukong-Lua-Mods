@@ -116,7 +116,7 @@ local function register_skill_animation_hook()
             -- 5豆大圣模式蓄力
             if montage_name:find("xuli_attack_5") or montage_name:find("AM_wukong_trans_to_dasheng") then
                 if montage_name:find("xuli_attack_5") then stats_buff.activate_health_regen(0.08) end
-                stats_buff.activate_damage_reduction_buff(8000, 2)
+                stats_buff.activate_damage_reduction_buff(8000, 3)
                 stance_effects.five_focus_wukong_stance()
             end
 
