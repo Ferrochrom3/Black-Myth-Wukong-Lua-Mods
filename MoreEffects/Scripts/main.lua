@@ -1,21 +1,9 @@
-local id_table                                            = require("effect_id_config")
-local stance_effects                                      = require("stance_effects")
-local stats_buff                                          = require("stats_buff")
+local id_table       = require("effect_id_config")
+local stance_effects = require("stance_effects")
+local stats_buff     = require("stats_buff")
 
-local player                                              = nil
-local library                                             = nil
-
--- See Through
-local resolute_counterflow_see_through_effective_duration = 0.6   -- (default is 0.4s) In seconds, the time window for See Through to be activated after performing Resolute Counterflow
-local tactical_retreat_see_through_effective_duration     = 0.566 -- (default is 0.366s) In seconds, the time window for See Through to be activated after performing Tactical Retreat
-
--- Stat buffs
-local damage_reduction_buff_amount                        = 1000 -- 10% increase (applied for See Through)
-local damage_reduction_buff_duration                      = 20   -- In seconds, how long the buff lasts after a successful See Through
-local damage_addition_buff_amount                         = 1000 -- 10% increase (applied for See Through)
-local damage_addition_buff_duration                       = 8    -- In seconds, how long the buff lasts after a successful See Through
-local health_regen_percentage                             = 0.06 -- Heal 6% of total health
-local mana_regen_percentage                               = 0.03 -- Regen 3% of total mana
+local player         = nil
+local library        = nil
 
 
 local function log_message(message)
@@ -73,19 +61,9 @@ local function register_skill_animation_hook()
         function(Context, Montage, PlayTimeRate, MontagePosOffset, StartSectionName, Reason)
             local montage_name = Montage:get():GetFullName()
 
-            -- 劈棍斩棍式
-            if montage_name:find("AM_Wukong_ComboA_z_02") then
-                stance_effects.sky_fall_strike()
-            end
-
             -- 4豆蓄力劈棍
             if montage_name:find("xuli_attack_4") then
                 stance_effects.four_focus_smash()
-            end
-
-            -- 戳棍进尺
-            if montage_name:find("AM_wukong_combob_z_02") then
-                stance_effects.forceful_thrust()
             end
 
             -- 4豆蓄力戳棍
@@ -115,8 +93,7 @@ local function register_skill_animation_hook()
 
             -- 5豆大圣模式蓄力
             if montage_name:find("xuli_attack_5") or montage_name:find("AM_wukong_trans_to_dasheng") then
-                if montage_name:find("xuli_attack_5") then stats_buff.activate_health_regen(0.09) end
-                stats_buff.activate_damage_reduction_buff(8000, 3)
+                if montage_name:find("xuli_attack_5") then stats_buff.activate_health_regen_with_cooldown_check(15) end
                 stance_effects.five_focus_wukong_stance()
             end
 
@@ -180,8 +157,6 @@ local function register_skill_animation_hook()
                 local BPPlayerController = FindFirstOf("BP_B1PlayerController_C")
                 player = BPPlayerController.pawn ---@diagnostic disable-line: undefined-field
             end
-
-            -- elseif montage_name:find("AM_wukong_combob_z_01") then -- 戳棍退寸，搅棍准备开始，搅棍第一搅都会触发
         end)
 end
 
@@ -193,60 +168,27 @@ local function register_buff_hook()
             -- =====Visual effects=====
             -- 主角劈棍，立棍，戳棍等级1表现
             if buff_id == 10821 or buff_id == 10841 or buff_id == 10861 then
-                add_buff(id_table.effect_GreatSageWeaponYellowShine, 1000)
+                add_buff(id_table.effect_GreatSageWeaponYellowShine, 100)
             end
 
             -- 主角劈棍，立棍，戳棍等级2表现
             if buff_id == 10822 or buff_id == 10842 or buff_id == 10862 then
-                add_buff(id_table.effect_GreatSageWeaponOrangeShine, 1000)
+                add_buff(id_table.effect_GreatSageWeaponOrangeShine, 100)
             end
 
-            -- 主角劈棍，立棍，戳棍等级3表现（立棍几乎无视1和2等，会立马出红闪）
+            -- 主角劈棍，立棍，戳棍等级3表现
             if buff_id == 10823 or buff_id == 10843 or buff_id == 10863 then
-                add_buff(id_table.effect_GreatSageWeaponRedShine, 1000)
+                add_buff(id_table.effect_GreatSageWeaponRedShine, 100)
             end
 
-            -- =====Slightly longer See Through window and buffs after Seen Through=====
-            -- Resolute Counterflow
-            if buff_id == 287 then
-                Duration:set(resolute_counterflow_see_through_effective_duration * 1000)
-                add_buff(id_table.combat_Immunity, resolute_counterflow_see_through_effective_duration * 1000)
-            end
-
-            -- Tactical Retreat
-            if buff_id == 293 then
-                Duration:set(tactical_retreat_see_through_effective_duration * 1000)
-                add_buff(id_table.combat_Immunity, tactical_retreat_see_through_effective_duration * 1000)
-            end
-
-            -- Add some stats after performing a sucessful See Through (custom See Through buff)
-            if buff_id == id_table.combat_SeeThroughBuff then
-                player = get_player()
-                library = get_library()
-
-                stats_buff.activate_health_regen(health_regen_percentage)
-                stats_buff.activate_mana_regen(mana_regen_percentage)
-                stats_buff.activate_damage_reduction_buff(damage_reduction_buff_amount, damage_reduction_buff_duration)
-                stats_buff.activate_damage_addition_buff(damage_addition_buff_amount, damage_addition_buff_duration)
-            end
-
-            -- =====Dodge=====
-            if buff_id == 10105 then     -- Slowed dodge (default 0.4s)
-                Duration:set(600)
-            elseif buff_id == 10106 then -- 0th (default 0.4s)
-                Duration:set(600)
-            elseif buff_id == 10107 then -- 1st (default 0.433s)
-                Duration:set(633)
-            elseif buff_id == 10108 then -- 2nd (default 0.466s)
-                Duration:set(666)
-            elseif buff_id == 10109 then -- 3rd (default 0.5s)
-                Duration:set(700)
+            -- 主角劈棍，立棍，戳棍等级4表现
+            if buff_id == 10824 or buff_id == 10844 or buff_id == 10864 then
             end
         end)
 end
 
 
-ExecuteWithDelay(5000, function()
+ExecuteWithDelay(2000, function()
     RegisterHook("/Script/Engine.PlayerController:ClientRestart", function(self, NewPawn)
         player = NewPawn:get()
     end)

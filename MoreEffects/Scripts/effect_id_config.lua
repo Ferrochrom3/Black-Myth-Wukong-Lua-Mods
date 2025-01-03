@@ -50,12 +50,15 @@ local effect_id_table = {
     continuousSummon_SupremeInspectorFeather = 717,         -- Interval: 500ms
 
     delayEffect_SkyFallStrike = 736,
-    delayEffect_FourFocusSmash = 737,
-    delayEffect_WukongStanceSmash = 738,
+    delayEffect_FourFocusSmash2 = 737,
+    delayEffect_FourFocusSmash3 = 738,
     delayEffect_ChuringGale = 743,
     delayEffect_SpinningStaffHeavyAttack = 744,
-    delayEffect_LightAttackCombo5 = 745,
-    delayEffect_ForcefulThurst = 746,
+    delayEffect_WukongStanceSmash1 = 745,
+    delayEffect_WukongStanceSmash2 = 749,
+    delayEffect_WukongStanceSmash3 = 750,
+    delayEffect_WukongStanceSmash4 = 751,
+    delayEffect_FourFocusSmash1 = 746,
 }
 
 return effect_id_table

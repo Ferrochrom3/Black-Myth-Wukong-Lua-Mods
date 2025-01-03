@@ -126,8 +126,9 @@ Mods that modified the same .data file will not work together, they need to be m
 BetterWukongSet
 - Go to "TalentSDesc.data"
     - Find
+        - 105012 狼牙棒 / 105020 磬槌
+        - 105022 兽棍·诸相
         - 907007 眼罩
-        - 105012 狼牙棒
         - 303662 攻击命中时，额外获得棍势 (303662 is the max level spirit effect)
         - (not used) 303671 受到攻击后的一段时间，增加伤害减免 (303671 is the max level spirit effect)
 
@@ -135,13 +136,17 @@ BetterWukongSet
 - Find 20 试比天高
 - Open SuitInfo()
     - Add a new "FUStSuitInfo" and open it
+        - Change "TriggerNum" to 5
+        - Change "SuitEffectID" to 105012
+        - Change "SuitEffectDesc" to "识破对手攻击后，短时间内不断获得<EquipDetail_SuitDesc_KW>棍势</>"
+    - Add a new "FUStSuitInfo" and open it
+        - Change "TriggerNum" to 5
+        - Change "SuitEffectID" to 105012
+        - Change "SuitEffectDesc" to "不同棍法的四段蓄力重棍，将向对手施加不同的灾苦"
+    - Add a new "FUStSuitInfo" and open it
         - Change "TriggerNum" to 1
         - Change "SuitEffectID" to 907007
         - Change "SuitEffectDesc" to "更容易触发<EquipDetail_SuitDesc_KW>闪身</>"
-    - Add a new "FUStSuitInfo" and open it
-        - Change "TriggerNum" to 1
-        - Change "SuitEffectID" to 105012
-        - Change "SuitEffectDesc" to "识破对手攻击后，短时间内不断获得<EquipDetail_SuitDesc_KW>棍势</>"
     - Add a new "FUStSuitInfo" and open it
         - Change "TriggerNum" to 1
         - Change "SuitEffectID" to 303662
