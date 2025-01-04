@@ -12,7 +12,8 @@ jsbLuaProfilerMod : 0
 ImprovedSeeThrough : 0
 IncreaseSpeed : 1
 ImprovedDodge : 0
-MoreEffects : 1
+MoreEffects : 0
+GreatSageVFX : 1
 
 
 ; Built-in keybinds, do not move up!
