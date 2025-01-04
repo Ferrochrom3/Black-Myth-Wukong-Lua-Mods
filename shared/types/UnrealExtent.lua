@@ -707,6 +707,14 @@ FTextFoldingConfig = {}
 
 
 
+---@class FUsbStorageDeviceInfo
+---@field TotalSpace int64
+---@field AvailableSpace int64
+---@field Manufacture FString
+FUsbStorageDeviceInfo = {}
+
+
+
 ---@class FVATAnimClipInfo
 ---@field State int32
 ---@field StartFrame int32
@@ -1275,6 +1283,9 @@ function UGSE_AnimFuncLib:RemoveNotifyEventByIndex(TargetMontage, Index) end
 function UGSE_AnimFuncLib:RemoveAllPoints(BlendSpace) end
 ---@param Owner AActor
 function UGSE_AnimFuncLib:ReinitAnim(Owner) end
+---@param AnimMontage UAnimMontage
+---@return boolean
+function UGSE_AnimFuncLib:MontageIsValidAdditive(AnimMontage) end
 ---@param InMontage UAnimMontage
 ---@param InTime float
 ---@param InBoneName FName
@@ -2607,6 +2618,11 @@ function UGSE_EngineFuncLib:AdjustPSOPrecompileBatch(BatchSize, BatchTime) end
 UGSE_FileFuncLib = {}
 
 ---@param Path FString
+---@param BytesToWrite TArray<uint8>
+---@param bAppend boolean
+---@return boolean
+function UGSE_FileFuncLib:WriteFile(Path, BytesToWrite, bAppend) end
+---@param Path FString
 ---@param BytesToRead TArray<uint8>
 ---@return boolean
 function UGSE_FileFuncLib:ReadFile(Path, BytesToRead) end
@@ -2678,6 +2694,8 @@ function UGSE_GSGameSettingsFuncLib:IsLowFeatureLevelGPU() end
 function UGSE_GSGameSettingsFuncLib:GetRHIAdapterName() end
 ---@return FString
 function UGSE_GSGameSettingsFuncLib:GetMainMonitorID() end
+---@return boolean
+function UGSE_GSGameSettingsFuncLib:GetIsPS5Pro() end
 ---@param World UWorld
 ---@return boolean
 function UGSE_GSGameSettingsFuncLib:GetIsHDRViewport(World) end
@@ -2901,6 +2919,11 @@ function UGSE_RenderUtilFuncLib:GetSceneViewPreExposure(WorldContext) end
 ---@class UGSE_SDKFuncLib : UBlueprintFunctionLibrary
 UGSE_SDKFuncLib = {}
 
+---@param DeviceIdStr FString
+---@param Path FString
+---@param IsFile boolean
+---@return boolean
+function UGSE_SDKFuncLib:UsbStorageIsExist(DeviceIdStr, Path, IsFile) end
 ---@param Content FString
 ---@return boolean
 function UGSE_SDKFuncLib:TestCallAndroidFunc(Content) end
@@ -2940,6 +2963,34 @@ function UGSE_SDKFuncLib:SentryCrashReporterSetRoot(RootKey, RootValue) end
 ---@param Key FString
 ---@param ContextValues TMap<FString, FString>
 function UGSE_SDKFuncLib:SentryCrashReporterSetContext(Key, ContextValues) end
+function UGSE_SDKFuncLib:ReenableMediaPlay() end
+---@param QueryEntitlementId FString
+---@return boolean
+function UGSE_SDKFuncLib:QueryIsOwnPS5EntitlementSync(QueryEntitlementId) end
+---@param UsrDir FString
+---@param OutDeviceId FString
+---@return EPS5UsbSelectErrorCode
+function UGSE_SDKFuncLib:PS5UsbSelectDevice(UsrDir, OutDeviceId) end
+---@param DeviceID FString
+---@param MountPoint FString
+---@param UsrDir FString
+---@param SubDir FString
+---@param OutDirPath FString
+---@return boolean
+function UGSE_SDKFuncLib:PS5UsbMkSubDir(DeviceID, MountPoint, UsrDir, SubDir, OutDirPath) end
+---@param DeviceID FString
+---@param UsrDir FString
+---@return EPS5RequestUnMapUsbErrorCode
+function UGSE_SDKFuncLib:PS5RequestUnMapUsb(DeviceID, UsrDir) end
+---@param DeviceID FString
+---@param UsrDir FString
+---@param OutMountPoint FString
+---@return EPS5RequestMapUsbErrorCode
+function UGSE_SDKFuncLib:PS5RequestMapUsb(DeviceID, UsrDir, OutMountPoint) end
+---@param Filename FString
+---@param FileContentData TArray<uint8>
+---@return EPS5UsbWriteErrorCode
+function UGSE_SDKFuncLib:PS5ExportDataToUsb(Filename, FileContentData) end
 function UGSE_SDKFuncLib:PrintCachedEntitlements() end
 ---@param Message FString
 ---@return boolean
@@ -2986,6 +3037,10 @@ function UGSE_SDKFuncLib:HttpPostFile(PostUrl, ExHeaders, FilePath, Listener) en
 function UGSE_SDKFuncLib:GetPS5UserDefinedParam(Index) end
 ---@return FString
 function UGSE_SDKFuncLib:GetPS5UserAccountRegionCode() end
+---@param DeviceID FString
+---@param OutInfo FUsbStorageDeviceInfo
+---@return boolean
+function UGSE_SDKFuncLib:GetPS5UsbStorageDeviceInfo(DeviceID, OutInfo) end
 ---@return EBGWNATType
 function UGSE_SDKFuncLib:GetNatInfo() end
 ---@return FString
@@ -2994,10 +3049,14 @@ function UGSE_SDKFuncLib:GetIOSDocumentPath() end
 function UGSE_SDKFuncLib:GetIOSBundlePath() end
 ---@param OutContext TMap<FString, FString>
 function UGSE_SDKFuncLib:GetGameRunEnvContext(OutContext) end
+---@param OutIds TArray<FString>
+---@return boolean
+function UGSE_SDKFuncLib:GetAllPS5UsbStorageDeviceId(OutIds) end
 ---@return FString
 function UGSE_SDKFuncLib:FCommandLine_Get() end
 ---@param Command FString
 function UGSE_SDKFuncLib:FCommandLine_AddArg(Command) end
+function UGSE_SDKFuncLib:DisableMediaPlay() end
 ---@param Key FString
 ---@param Value FString
 ---@return boolean
@@ -3304,6 +3363,8 @@ function UGSE_SystemSettingsFuncLib:GetRecommendedScalabilityQuality(bLogInfo) e
 ---@param AspectRatio FIntPoint
 ---@return TArray<FIntPoint>
 function UGSE_SystemSettingsFuncLib:GetProportionalResolutions(AspectRatio) end
+---@return int32
+function UGSE_SystemSettingsFuncLib:GetMaxRefreshRate() end
 ---@return FIntPoint
 function UGSE_SystemSettingsFuncLib:GetGSystemResolution() end
 ---@param InGraphicsMemoryMode EGSGraphicsMemoryMode
@@ -3732,6 +3793,12 @@ function UGSE_UMGFuncLib:GetViewPortAbsPosition(WorldContextObject) end
 ---@param TextBlock UTextBlock
 ---@return UMaterialInstanceDynamic
 function UGSE_UMGFuncLib:GetTextBlockOutlineDynamicMaterial(TextBlock) end
+---@param HitAreaDA UDataAsset
+---@param X int32
+---@param Y int32
+---@param OutColor FLinearColor
+---@return boolean
+function UGSE_UMGFuncLib:GetTexDAColor(HitAreaDA, X, Y, OutColor) end
 ---@param WorldContextObject UObject
 ---@return FMargin
 function UGSE_UMGFuncLib:GetSafeZonePaddingSize(WorldContextObject) end
@@ -3797,6 +3864,7 @@ function UGSE_UMGFuncLib:GetAllChildUserWidget(ParentWidget) end
 ---@param InTextBlock UTextBlock
 ---@param InFoldingConfig FTextFoldingConfig
 function UGSE_UMGFuncLib:FoldTextContent(InTextBlock, InFoldingConfig) end
+function UGSE_UMGFuncLib:FlushFontCache() end
 ---@param UserWidget UUserWidget
 ---@param ParentWidget UPanelWidget
 ---@param ChildWidgetName FName

@@ -1,20 +1,29 @@
 ---@meta
 
 ---@class UBUI_LoadingV2_C : UBUI_Widget
+---@field _PreviewAnimHide UWidgetAnimation
+---@field _PreviewAnimShow UWidgetAnimation
 ---@field BGDown UImage
 ---@field BGLeft UImage
 ---@field BGRight UImage
 ---@field BGTop UImage
+---@field BI_Enemy_0 UBI_Loading_BossRushEnemy_C
+---@field BI_Enemy_1 UBI_Loading_BossRushEnemy_C
+---@field BI_Enemy_2 UBI_Loading_BossRushEnemy_C
+---@field BI_Enemy_3 UBI_Loading_BossRushEnemy_C
+---@field BI_Enemy_4 UBI_Loading_BossRushEnemy_C
+---@field BI_Enemy_5 UBI_Loading_BossRushEnemy_C
 ---@field BI_Loading_Item_Name_1 UBI_Loading_Item_Name_C
 ---@field BI_Loading_Item_Name_2 UBI_Loading_Item_Name_C
 ---@field ContinueTipsBtnKB UImage
 ---@field ContinueTipsBtnPS UImage
 ---@field ContinueTipsBtnXSX UImage
 ---@field ImgChapter UImage
----@field ImgTimer UImage
----@field ImgTimer2 UImage
----@field ImgTipsBg UImage
----@field ImgTipsBtn UImage
+---@field ImgCoreDebuffBg UImage
+---@field ImgCoreIterations UImage
+---@field ImgCoreRechallenge UImage
+---@field ImgCoreSubTitle UImage
+---@field ImgDebuffState UImage
 ---@field ImgTipsBtn_1 UImage
 ---@field ImgTipsBtn_2 UImage
 ---@field ImgTipsBtn_3 UImage
@@ -22,13 +31,23 @@
 ---@field ImgTipsBtn_5 UImage
 ---@field ImgTipsBtn_6 UImage
 ---@field ImgTipsTextBg UImage
----@field ImgTitleBg UImage
+---@field ImgTitleIterations UImage
+---@field ImgTitleRechallenge UImage
+---@field ImgTitleTxtIterations UImage
+---@field ImgTitleTxtRechallenge UImage
+---@field IterationsImage UImage
+---@field IterationsMask UImage
 ---@field MainBgImg UImage
+---@field MarkerBonus UImage
 ---@field MaskLoadingtips UImage
 ---@field ProgressImg UImage
+---@field RechallengeImage UImage
+---@field RechallengeMask UImage
 ---@field SliderImg UImage
 ---@field TipsTxt URichTextBlock
 ---@field TitleBgImg UImage
+---@field TxtNameIterations URichTextBlock
+---@field TxtNameRechallenge URichTextBlock
 UBUI_LoadingV2_C = {}
 
 

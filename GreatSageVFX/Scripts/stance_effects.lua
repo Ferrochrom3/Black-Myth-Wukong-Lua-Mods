@@ -55,13 +55,18 @@ function stance_effects.four_focus_pillar()
 end
 
 function stance_effects.enter_wukong_stance()
-    add_buff(id_table.delayedEffect_5FocusSmash3, 3000);
+    add_buff(id_table.delayedEffect_5FocusSmash2, 3200);
+    add_buff(id_table.delayedEffect_5FocusSmash3, 3600);
 end
 
 function stance_effects.five_focus_wukong_stance()
     add_buff(id_table.delayedEffect_5FocusSmash1, 2500);
     add_buff(id_table.delayedEffect_5FocusSmash2, 3200);
-    add_buff(id_table.delayedEffect_5FocusSmash3, 3650);
+    add_buff(id_table.delayedEffect_5FocusSmash3, 3600);
+end
+
+function stance_effects.four_focus_air_dasheng_smash()
+    add_buff(id_table.vfx_StaffRedCharge, 2600);
 end
 
 -- ========================================================================================================================================================================================== --
@@ -93,6 +98,9 @@ end
 
 -- Wukong stance light attack 2 followed by 1 heavy（挥，戳)
 function stance_effects.wukong_stance_combo_2_heavy_1()
+    add_buff(id_table.dasheng2ASeeThrough, 600)
+    add_buff(id_table.tacticalRetreatSeeThrough, 600)
+
     add_buff(id_table.vfx_StaffOrangeCharge, 3000)
 end
 
@@ -107,18 +115,24 @@ end
 
 -- Wukong stance light attack 3
 function stance_effects.wukong_stance_combo_3()
-    add_buff(id_table.vfx_StaffOrangeCharge, 2500)
+    add_buff(id_table.vfx_StaffOrangeCharge, 1000)
 end
 
 -- Wukong stance light attack 3 followed by 1 heavy（大挥）
 function stance_effects.wukong_stance_combo_3_heavy_1()
-    add_buff(id_table.vfx_StaffOrangeCharge, 2000)
+    add_buff(id_table.dasheng3ASeeThrough, 600)
+    add_buff(id_table.tacticalRetreatSeeThrough, 600)
+
     add_buff(id_table.vfx_GreatSageOrangeShine, 300)
 end
 
 -- Wukong stance light attack 3 followed by 2 heavies (江海翻)
 function stance_effects.wukong_stance_combo_3_heavy_2()
-    add_buff(id_table.vfx_GreatSageRedShine, 100)
+    add_buff(id_table.customSeeThroughImmunity, 200)
+    add_buff(id_table.tacticalRetreatSeeThrough, 200)
+
+    add_buff(id_table.delayedEffect_ChuringGale1, 800)
+    add_buff(id_table.delayedEffect_ChuringGale2, 2400)
 end
 
 -- ========================================================================================================================================================================================== --

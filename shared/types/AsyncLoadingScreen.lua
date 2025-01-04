@@ -1,5 +1,23 @@
 ---@meta
 
+---@class FBossRushInfo
+---@field LoadingType EBossRushLoadingType
+---@field BossName FText
+---@field DifficultyTitle FText
+---@field DifficultyDesc FText
+---@field DifficultyText FText
+---@field DifficultyLevel int32
+---@field GroupText FText
+---@field IterationsChallengeCurrentIndex int32
+---@field IterationsChallengeCount int32
+---@field DebuffList TArray<int32>
+---@field BossImage UTexture2D
+---@field IsNeedHide boolean
+---@field Masks TMap<FName, UTexture2D>
+FBossRushInfo = {}
+
+
+
 ---@class FChapterInfo
 ---@field IsNeedShow boolean
 ---@field ChapterPreName FText

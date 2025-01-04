@@ -1,3 +1,10 @@
+---@enum EBossRushLoadingType
+EBossRushLoadingType = {
+    ReChallengeBoss = 0,
+    BossIterations = 1,
+    EBossRushLoadingType_MAX = 2,
+}
+
 ---@enum EGSLoadingScreenState
 EGSLoadingScreenState = {
     Idle = 0,
@@ -15,6 +22,7 @@ EGSLoadingScreenType = {
     FullBlack = 3,
     FullWhite = 4,
     Chapter = 5,
-    EGSLoadingScreenType_MAX = 6,
+    BossRush = 6,
+    EGSLoadingScreenType_MAX = 7,
 }
 

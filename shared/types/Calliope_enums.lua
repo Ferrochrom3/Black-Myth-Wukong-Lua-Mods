@@ -42,7 +42,8 @@ ECalliopeViewType = {
     FSM = 9,
     Dialogue = 10,
     Guide = 11,
-    Max = 12,
+    BossRush = 12,
+    Max = 13,
 }
 
 ---@enum EGsDynamicObstacleManagePolice

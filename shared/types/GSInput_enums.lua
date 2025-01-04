@@ -14,6 +14,15 @@ EGSIconPerformanceType = {
     EGSIconPerformanceType_MAX = 3,
 }
 
+---@enum EGSInputActionIconSupportedPlatform
+EGSInputActionIconSupportedPlatform = {
+    None = 0,
+    Windows = 1,
+    XSX = 2,
+    PS5 = 3,
+    EGSInputActionIconSupportedPlatform_MAX = 4,
+}
+
 ---@enum EGSInputDeviceType
 EGSInputDeviceType = {
     Microsoft = 0,

@@ -125,6 +125,68 @@ EGSUIConflictNavigationType = {
     EGSUIConflictNavigationType_MAX = 3,
 }
 
+---@enum EPS5RequestMapUsbErrorCode
+EPS5RequestMapUsbErrorCode = {
+    DeviceDoesNotExist = 0,
+    TargetDirNotExist = 1,
+    TargetDirIsUsedByAnotherProcess = 2,
+    TargetDirIsNotInParamJson = 3,
+    MkSubDirFailed = 4,
+    MapNumMax = 5,
+    Unknown = 6,
+    Success = 7,
+    NotSupport = 8,
+    EPS5RequestMapUsbErrorCode_MAX = 9,
+}
+
+---@enum EPS5RequestUnMapUsbErrorCode
+EPS5RequestUnMapUsbErrorCode = {
+    DeviceDoesNotExist = 0,
+    TargetDirNotMap = 1,
+    Unknown = 2,
+    Success = 3,
+    NotSupport = 4,
+    EPS5RequestUnMapUsbErrorCode_MAX = 5,
+}
+
+---@enum EPS5UsbSelectErrorCode
+EPS5UsbSelectErrorCode = {
+    UsrNotInit = 0,
+    UsrParamError = 1,
+    OperationCantBeUsed = 2,
+    UsrCancel = 3,
+    Unknown = 4,
+    Success = 5,
+    NotSupport = 6,
+    EPS5UsbSelectErrorCode_MAX = 7,
+}
+
+---@enum EPS5UsbStorageErrorCode
+EPS5UsbStorageErrorCode = {
+    DeviceDoesNotExist = 0,
+    TargetDirNotExist = 1,
+    TargetDirIsUsedByAnotherProcess = 2,
+    TargetDirIsNotInParamJson = 3,
+    MapNumMax = 4,
+    TargetDirIsFile = 5,
+    MkSubDirFailed = 6,
+    Unknown = 7,
+    Success = 8,
+    EPS5UsbStorageErrorCode_MAX = 9,
+}
+
+---@enum EPS5UsbWriteErrorCode
+EPS5UsbWriteErrorCode = {
+    NoAvailableSpace = 0,
+    OpenIOError = 1,
+    WriteIOError = 2,
+    NoUsbStorageDevice = 3,
+    Unknown = 4,
+    Success = 5,
+    NotSupport = 6,
+    EPS5UsbWriteErrorCode_MAX = 7,
+}
+
 ---@enum ERRIndicatorType
 ERRIndicatorType = {
     Top = 0,

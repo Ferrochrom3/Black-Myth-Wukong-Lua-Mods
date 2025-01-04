@@ -530,7 +530,8 @@ DefeatUITriggerType = {
     Dead = 1,
     Seq = 2,
     Cpg = 3,
-    DefeatUITriggerType_MAX = 4,
+    BossRush = 4,
+    DefeatUITriggerType_MAX = 5,
 }
 
 ---@enum DmgRangeType
@@ -863,6 +864,24 @@ EBGUResetType = {
     None = 5,
     EnumMax = 6,
     EBGUResetType_MAX = 7,
+}
+
+---@enum EBRLimitTargetType
+EBRLimitTargetType = {
+    None = 0,
+    Player = 1,
+    Monster = 2,
+    EBRLimitTargetType_MAX = 3,
+}
+
+---@enum EBRLimitType
+EBRLimitType = {
+    None = 0,
+    AttrOverride = 1,
+    Talent = 2,
+    Buff = 3,
+    BattleTimeLimit = 4,
+    EBRLimitType_MAX = 5,
 }
 
 ---@enum EECSDataInitType
@@ -1384,7 +1403,8 @@ InputActionType = {
     CloudFreeLook = 40,
     ToggleCloudMove = 41,
     SpinModeMoveForward = 42,
-    InputActionType_MAX = 43,
+    OpenMap = 43,
+    InputActionType_MAX = 44,
 }
 
 ---@enum InterActMappingCondition
@@ -1632,7 +1652,8 @@ ModifyMethod = {
     SkillMinAttrCostRatio1 = 63,
     SkillMinAttrCostRatio2 = 64,
     SealingSpellSkillDuration = 65,
-    ModifyMethod_MAX = 66,
+    QiTianDaShengNormalModeDuration = 66,
+    ModifyMethod_MAX = 67,
 }
 
 ---@enum MoveSpeedType

@@ -388,6 +388,14 @@ EGsEnAnimNS = {
     Max = 28,
 }
 
+---@enum EHitMoveDir
+EHitMoveDir = {
+    Default = 0,
+    XAxisHitMove = 1,
+    YAxisHitMove = 2,
+    EHitMoveDir_MAX = 3,
+}
+
 ---@enum EOnlineActivityOutcomeType
 EOnlineActivityOutcomeType = {
     Completed = 0,

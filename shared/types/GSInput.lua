@@ -145,6 +145,7 @@ function UGSE_InputFuncLib:AddInputMappingContext(PlayerController, InputMapping
 ---@class UGSInputActionIcon : UImage
 ---@field SpeedRatioOnStopHold float
 ---@field InputIconTexture UTexture2D
+---@field PlatformInputIconTextures TMap<EGSInputActionIconSupportedPlatform, UTexture2D>
 ---@field InputAction UInputAction
 ---@field ExtraInputActions TArray<UInputAction>
 ---@field IconShowType EGSInputIconShowType

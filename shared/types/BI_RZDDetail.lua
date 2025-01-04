@@ -1,0 +1,69 @@
+---@meta
+
+---@class UBI_RZDDetail_C : UBUI_Widget
+---@field UberGraphFrame FPointerToUberGraphFrame
+---@field AKBPicSwitch UWidgetAnimation
+---@field AnimUpgrade UWidgetAnimation
+---@field ['-----------'] UWidgetAnimation
+---@field AKBEquiped UWidgetAnimation
+---@field AnimEquiped UWidgetAnimation
+---@field AKBStateSuitTxt UWidgetAnimation
+---@field ['------------'] UWidgetAnimation
+---@field AKBVideoState UWidgetAnimation
+---@field GSAKBDetailState UWidgetAnimation
+---@field GSAKBShowHide UWidgetAnimation
+---@field BI_CostItem UBI_CostItem_C
+---@field BI_DetailPageSwitcher UBI_DetailPageSwitcher_C
+---@field BI_EffectDesc UBI_EffectDesc_C
+---@field BI_EquipLongPress UBI_DetailLongPress_C
+---@field BI_GearDetailBg UBI_GearDetailBg_C
+---@field BI_KeyCostItem UBI_CostItemKey_C
+---@field BI_ScrollInputTips UBI_ScrollInputTips_WithComb_C
+---@field BI_UIFXDetailForged UBI_UIFXDetailForged_C
+---@field ContentScroll UBI_ScrollBoxNew_C
+---@field ImgPageFrame UImage
+---@field ImgVideo UImage
+---@field ImgVideoBink UImage
+---@field InputIcon_HideVideo UGSInputActionIcon
+---@field InputIcon_ShowVideo UGSInputActionIcon
+---@field InputIconScroll UGSInputActionIcon
+---@field MarkerWearing UImage
+---@field NGForgeSpark_Left UNiagaraSystemWidget
+---@field NGForgeSpark_Right UNiagaraSystemWidget
+---@field NGForgeSpark_Top UNiagaraSystemWidget
+---@field RetainerMaskSuitDesc UGSRetainerBox
+---@field RZDItem UBI_RZDDetailItem_C
+---@field Spline UImage
+---@field SpLine_Passive UImage
+---@field SpLineNext UImage
+---@field TreasureEqDesc UBI_TreasureEqDesc_C
+---@field TxtInputTips UGSInputRichTextBlock
+---@field TxtNameRuby UGSRichScaleText
+---@field TxtSkillDesc URichTextBlock
+---@field UIFX_ForgedLight UImage
+---@field SparkLifeTime FVector2D
+---@field SparkSize float
+UBI_RZDDetail_C = {}
+
+function UBI_RZDDetail_C:SequenceEvent__ENTRYPOINTBI_RZDDetail_1() end
+function UBI_RZDDetail_C:SequenceEvent__ENTRYPOINTBI_RZDDetail_0() end
+---@param NGForgeSpark_Top UNiagaraSystemWidget
+function UBI_RZDDetail_C:SeqFX_Play_Top(NGForgeSpark_Top) end
+---@param NGForgeSpark_Top UNiagaraSystemWidget
+function UBI_RZDDetail_C:SeqFX_Stop_Top(NGForgeSpark_Top) end
+---@param NGForgeSpark_Left UNiagaraSystemWidget
+function UBI_RZDDetail_C:SeqFX_Play_Left(NGForgeSpark_Left) end
+---@param NGForgeSpark_Right UNiagaraSystemWidget
+function UBI_RZDDetail_C:SeqFX_Play_Right(NGForgeSpark_Right) end
+---@param NGForgeSpark_Left UNiagaraSystemWidget
+function UBI_RZDDetail_C:SeqFX_Stop_Left(NGForgeSpark_Left) end
+---@param NGForgeSpark_Right UNiagaraSystemWidget
+function UBI_RZDDetail_C:SeqFX_Stop_Right(NGForgeSpark_Right) end
+function UBI_RZDDetail_C:SeqAnim_DetailBg_Upgrade() end
+function UBI_RZDDetail_C:SeqAnim_DetailBg_Equiped() end
+---@param IsDesignTime boolean
+function UBI_RZDDetail_C:PreConstruct(IsDesignTime) end
+---@param EntryPoint int32
+function UBI_RZDDetail_C:ExecuteUbergraph_BI_RZDDetail(EntryPoint) end
+
+

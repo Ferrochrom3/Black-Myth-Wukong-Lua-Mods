@@ -1,0 +1,69 @@
+---@meta
+
+---@class UBI_RoleAttr_V3_C : UBUI_Widget
+---@field UberGraphFrame FPointerToUberGraphFrame
+---@field StateChange UWidgetAnimation
+---@field ['------------------'] UWidgetAnimation
+---@field AnimObsFold UWidgetAnimation
+---@field AnimObsUnfold UWidgetAnimation
+---@field AnimHide UWidgetAnimation
+---@field AnimShow UWidgetAnimation
+---@field AnimShowComplex UWidgetAnimation
+---@field AnimShowSimple UWidgetAnimation
+---@field BI_SecRoleAttrFold_0 UBI_SecRoleAttrFold_V3_C
+---@field BI_SecRoleAttrFold_1 UBI_SecRoleAttrFold_V3_C
+---@field BI_SecRoleAttrFold_2 UBI_SecRoleAttrFold_V3_C
+---@field BI_SecRoleAttrFold_3 UBI_SecRoleAttrFold_V3_C
+---@field BI_SecRoleAttrFold_4 UBI_SecRoleAttrFold_V3_C
+---@field BI_SecRoleAttrFold_5 UBI_SecRoleAttrFold_V3_C
+---@field BI_SecRoleAttrFold_6 UBI_SecRoleAttrFold_V3_C
+---@field BI_SecRoleAttrFold_7 UBI_SecRoleAttrFold_V3_C
+---@field BI_SecRoleAttrFold_8 UBI_SecRoleAttrFold_V3_C
+---@field BI_SecRoleAttrFold_9 UBI_SecRoleAttrFold_V3_C
+---@field BI_SecRoleAttrUnfold_0 UBI_SecRoleAttrUnfold_V3_C
+---@field BI_SecRoleAttrUnfold_1 UBI_SecRoleAttrUnfold_V3_C
+---@field BI_SecRoleAttrUnfold_2 UBI_SecRoleAttrUnfold_V3_C
+---@field BI_SecRoleAttrUnfold_3 UBI_SecRoleAttrUnfold_V3_C
+---@field BI_SecRoleAttrUnfold_4 UBI_SecRoleAttrUnfold_V3_C
+---@field BI_SecRoleAttrUnfold_5 UBI_SecRoleAttrUnfold_V3_C
+---@field BI_SecRoleAttrUnfold_6 UBI_SecRoleAttrUnfold_V3_C
+---@field BI_SecRoleAttrUnfold_7 UBI_SecRoleAttrUnfold_V3_C
+---@field BI_SecRoleAttrUnfold_8 UBI_SecRoleAttrUnfold_V3_C
+---@field BI_SecRoleAttrUnfold_9 UBI_SecRoleAttrUnfold_V3_C
+---@field BI_SecRoleAttrUnfold_10 UBI_SecRoleAttrUnfold_V3_C
+---@field BI_SecRoleAttrUnfold_11 UBI_SecRoleAttrUnfold_V3_C
+---@field BI_SecRoleAttrUnfold_12 UBI_SecRoleAttrUnfold_V3_C
+---@field BI_SecRoleAttrUnfold_13 UBI_SecRoleAttrUnfold_V3_C
+---@field ExpBar UCanvasPanel
+---@field ExpBarUnfold UCanvasPanel
+---@field HoverBox UImage
+---@field HoverBoxSimple UImage
+---@field Image UImage
+---@field Image_1 UImage
+---@field Image_2 UImage
+---@field Image_3 UImage
+---@field Image_4 UImage
+---@field Image_93 UImage
+---@field ImgFoldBg UImage
+---@field ImgUnfoldBg UImage
+---@field ProgBar UGSProcBar
+---@field ProgBarUnfold UGSProcBar
+---@field ProgBG UImage
+---@field ProgBGUnfold UImage
+UBI_RoleAttr_V3_C = {}
+
+---@param IsDesignTime boolean
+function UBI_RoleAttr_V3_C:PreConstruct(IsDesignTime) end
+function UBI_RoleAttr_V3_C:Construct() end
+function UBI_RoleAttr_V3_C:EventAnimShow_Play() end
+function UBI_RoleAttr_V3_C:EventAnimShow_Stop() end
+function UBI_RoleAttr_V3_C:EventAnimHide_Play() end
+function UBI_RoleAttr_V3_C:EventAnimHide_Stop() end
+function UBI_RoleAttr_V3_C:EventAnimObsFold_Play() end
+function UBI_RoleAttr_V3_C:EventAnimObsUnfold_Play() end
+function UBI_RoleAttr_V3_C:EventAnimObsFold_Stop() end
+function UBI_RoleAttr_V3_C:EventAnimObsUnfold_Stop() end
+---@param EntryPoint int32
+function UBI_RoleAttr_V3_C:ExecuteUbergraph_BI_RoleAttr_V3(EntryPoint) end
+
+

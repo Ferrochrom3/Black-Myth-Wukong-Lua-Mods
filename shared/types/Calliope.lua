@@ -598,6 +598,11 @@ function UCalliopeAsset:GetStartNodeClass() end
 function UCalliopeAsset:GetRerouteNodeClassInBranchGraph() end
 ---@return UClass
 function UCalliopeAsset:GetRerouteNodeClass() end
+---@param ParentPropertyName FString
+---@param PropertyName FString
+---@param OutParamArray TArray<FCalliopeGuid>
+---@return boolean
+function UCalliopeAsset:GetPossibleParamsCS(ParentPropertyName, PropertyName, OutParamArray) end
 ---@param InConfigGuid FCalliopeGuid
 ---@param OutTaskStageID int32
 ---@return boolean
@@ -626,6 +631,11 @@ function UCalliopeAsset:GetParameterBuffIDByConfigGuid(InConfigGuid, OutBuffID) 
 ---@param OutActorGuid FString
 ---@return boolean
 function UCalliopeAsset:GetParameterActorGuidByConfigGuid(InConfigGuid, OutActorGuid) end
+---@param PropertyName FString
+---@param InConfigGuid FCalliopeGuid
+---@param OutDisplayName FString
+---@return boolean
+function UCalliopeAsset:GetParamDisplayNameCS(PropertyName, InConfigGuid, OutDisplayName) end
 ---@return TMap<FCalliopeGuid, UCalliopeNode>
 function UCalliopeAsset:GetNodes() end
 ---@param InGuid FCalliopeGuid
@@ -853,6 +863,7 @@ UCalliopeMovieSceneCinematicShotTrack = {}
 ---@field OutputNames TArray<FName>
 ---@field ParentNode FGsCalliopeNodeParam
 ---@field SceneObjPoliceConfig FGsSceneObjPoliceConfig
+---@field ReferenceInitialNodes TArray<FGuid>
 UCalliopeNode = {}
 
 ---@param Asset UCalliopeAsset

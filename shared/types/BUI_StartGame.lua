@@ -1,0 +1,87 @@
+---@meta
+
+---@class UBUI_StartGame_C : UBUI_Widget
+---@field UberGraphFrame FPointerToUberGraphFrame
+---@field testC UWidgetAnimation
+---@field textB UWidgetAnimation
+---@field AnimEnterStart_0 UWidgetAnimation
+---@field NewAnimation_1 UWidgetAnimation
+---@field TestA UWidgetAnimation
+---@field ['--------------'] UWidgetAnimation
+---@field AnimNonePAK UWidgetAnimation
+---@field AnimNonePAKSeq UWidgetAnimation
+---@field AnimPressAnyKey UWidgetAnimation
+---@field AnimPressAnyKeySeq UWidgetAnimation
+---@field AnimStartGame UWidgetAnimation
+---@field AnimStartGameSeq UWidgetAnimation
+---@field AKBLogoColor UWidgetAnimation
+---@field GSAKBRoam UWidgetAnimation
+---@field GSAKBContinueBtn UWidgetAnimation
+---@field AnimShowHide UWidgetAnimation
+---@field AnimEnterStart UWidgetAnimation
+---@field BI_AgeTips UBI_AgeTips_C
+---@field BI_FirstStartBtn UBI_FirstStartBtn_C
+---@field BI_InputRoot UBI_InputRoot_C
+---@field BI_StartGameBtn_0 UBI_StartGame_C
+---@field BI_StartGameBtn_1 UBI_StartGame_C
+---@field BI_StartGameBtn_2 UBI_StartGame_C
+---@field BI_StartGameBtn_3 UBI_StartGame_C
+---@field BI_StartGameBtn_4 UBI_StartGame_C
+---@field BI_StartGameBtn_5 UBI_StartGame_C
+---@field BI_StartGameBtn_6 UBI_StartGame_C
+---@field BI_StartGameBtn_7 UBI_StartGame_C
+---@field BI_StartGameBtn_8 UBI_StartGame_C
+---@field BI_StartGameBtn_9 UBI_StartGame_C
+---@field ButtonA UBI_BattleEnd_Action_C
+---@field Image_252 UImage
+---@field ImgBlack UImage
+---@field ImgLine UImage
+---@field ImgTitleBg UImage
+---@field LoginLoadingBgLetter UImage
+---@field Logo UImage
+---@field NINS_smokebg UNiagaraSystemWidget
+---@field NINS_smokefb UNiagaraSystemWidget
+---@field PlayerIcon UImage
+---@field RecordBgN UImage
+---@field RTxtTips URichTextBlock
+---@field NewVar_0 int32
+---@field ['Restore State'] boolean
+UBUI_StartGame_C = {}
+
+function UBUI_StartGame_C:SequenceEvent__ENTRYPOINTBUI_StartGame_10() end
+function UBUI_StartGame_C:SequenceEvent__ENTRYPOINTBUI_StartGame_9() end
+function UBUI_StartGame_C:SequenceEvent__ENTRYPOINTBUI_StartGame_8() end
+function UBUI_StartGame_C:SequenceEvent__ENTRYPOINTBUI_StartGame_7() end
+function UBUI_StartGame_C:SequenceEvent__ENTRYPOINTBUI_StartGame_6() end
+---@param NINS_smokebg UNiagaraSystemWidget
+function UBUI_StartGame_C:SequenceEvent__ENTRYPOINTBUI_StartGame_5(NINS_smokebg) end
+---@param NINS_smokebg UNiagaraSystemWidget
+function UBUI_StartGame_C:SequenceEvent__ENTRYPOINTBUI_StartGame_4(NINS_smokebg) end
+---@param NINS_smokebg UNiagaraSystemWidget
+function UBUI_StartGame_C:SequenceEvent__ENTRYPOINTBUI_StartGame_3(NINS_smokebg) end
+---@param NINS_smokebg UNiagaraSystemWidget
+function UBUI_StartGame_C:SequenceEvent__ENTRYPOINTBUI_StartGame_2(NINS_smokebg) end
+---@param NINS_smokebg UNiagaraSystemWidget
+function UBUI_StartGame_C:SequenceEvent__ENTRYPOINTBUI_StartGame_1(NINS_smokebg) end
+function UBUI_StartGame_C:SequenceEvent__ENTRYPOINTBUI_StartGame_0() end
+---@param EventName FString
+function UBUI_StartGame_C:AnimNonePAKEvent(EventName) end
+---@param NINS_smokebg UNiagaraSystemWidget
+function UBUI_StartGame_C:NINS_smokebg_Event_0(NINS_smokebg) end
+---@param NINS_smokebg UNiagaraSystemWidget
+function UBUI_StartGame_C:NINS_smokebg_Event_1(NINS_smokebg) end
+---@param NINS_smokebg UNiagaraSystemWidget
+function UBUI_StartGame_C:NINS_smokebg_Event_2(NINS_smokebg) end
+---@param NINS_smokebg UNiagaraSystemWidget
+function UBUI_StartGame_C:NINS_smokebg_Event_3(NINS_smokebg) end
+---@param EventName FString
+function UBUI_StartGame_C:AnimPressAnyKeyEvent(EventName) end
+---@param EventName FString
+function UBUI_StartGame_C:AnimPressAnyKeySeqEvent(EventName) end
+---@param IsDesignTime boolean
+function UBUI_StartGame_C:PreConstruct(IsDesignTime) end
+function UBUI_StartGame_C:Construct() end
+---@param EntryPoint int32
+function UBUI_StartGame_C:ExecuteUbergraph_BUI_StartGame(EntryPoint) end
+
+

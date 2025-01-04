@@ -339,6 +339,14 @@ BlockCounterType = {
     BlockCounterType_MAX = 2,
 }
 
+---@enum BossRushPlayerStartType
+BossRushPlayerStartType = {
+    None = 0,
+    Single = 1,
+    Group = 2,
+    BossRushPlayerStartType_MAX = 3,
+}
+
 ---@enum BuffControlCondition
 BuffControlCondition = {
     EnterCollisionArea = 0,
@@ -423,7 +431,9 @@ BuffSourceType = {
     BeAttacked = 71,
     Trans2DaSheng = 72,
     FollowPartner = 73,
-    BuffSourceType_MAX = 74,
+    BossRushDebuff = 74,
+    BossRushProtect = 75,
+    BuffSourceType_MAX = 76,
 }
 
 ---@enum BuffTarget
@@ -621,26 +631,29 @@ CastSkillSourceType = {
     HardMove = 22,
     Intimidate = 23,
     MagicallyChange = 24,
-    PhantomRush = 25,
-    PlayerItem = 26,
-    PlayerTrans = 27,
-    PreciseDodge = 28,
-    Rebirth = 29,
-    BornSkill = 30,
-    PhaseTransition = 31,
-    SmartCastSkill = 32,
-    SummonBehavior = 33,
-    CBG = 34,
-    CPG = 35,
-    CQG = 36,
-    ComboDebug = 37,
-    Interact = 38,
-    Teleport = 39,
-    SummonBorn = 40,
-    Trans = 41,
-    TransitionPhase = 42,
-    TurnSkill = 43,
-    CastSkillSourceType_MAX = 44,
+    VigorLeaveSkill = 25,
+    MagicallyChangeReset = 26,
+    PhantomRush = 27,
+    PlayerItem = 28,
+    PlayerTrans = 29,
+    PreciseDodge = 30,
+    Rebirth = 31,
+    BornSkill = 32,
+    PhaseTransition = 33,
+    SmartCastSkill = 34,
+    SummonBehavior = 35,
+    CBG = 36,
+    CPG = 37,
+    CQG = 38,
+    ComboDebug = 39,
+    Interact = 40,
+    Teleport = 41,
+    SummonBorn = 42,
+    Trans = 43,
+    TransitionPhase = 44,
+    TurnSkill = 45,
+    OpenMap = 46,
+    CastSkillSourceType_MAX = 47,
 }
 
 ---@enum ChangeMatUnitAttrType
@@ -1751,7 +1764,8 @@ EBGUSimpleState = {
     ImmueStiff = 17,
     ImmueImmobilizing = 18,
     ImmueAnimationSyncing = 19,
-    ForbidLifeSavingHair = 20,
+    ForbidAllLifeSavingHair = 20,
+    ForbidAllLifeSavingHairExceptJZHHD = 21,
     BreakPart2Weak = 22,
     ImmueBurnAcc = 23,
     ImmuePoisonAcc = 24,
@@ -1888,8 +1902,10 @@ EBGUSimpleState = {
     BanTrans2DaSheng = 169,
     CantCastFaBao = 170,
     CantTransInSeq = 171,
-    EnumMax = 172,
-    EBGUSimpleState_MAX = 173,
+    IgnoreUseItem = 172,
+    CantBeDead1HP = 173,
+    EnumMax = 174,
+    EBGUSimpleState_MAX = 175,
 }
 
 ---@enum EBGUSpeedCtrlID
@@ -2159,7 +2175,9 @@ EGI_Global = {
     ReadArchiveFailed = 24,
     BenchMark = 25,
     GMLevelTravel = 26,
-    EGI_MAX = 27,
+    EnterBossRush = 27,
+    LeaveBossRush = 28,
+    EGI_MAX = 29,
 }
 
 ---@enum EGI_Global_IsIgnoreWXLogin_Result
@@ -3036,18 +3054,27 @@ EUIPageID = {
     NewGamePlusGuide = 84,
     LoadingAdaptor = 85,
     ShaderCompilingConfirm = 86,
-    MiniGM = 87,
-    GMConfirm = 88,
-    GMCommTips = 89,
-    ReportBugPanel = 90,
-    UITexConfigCheck = 91,
-    HexRoomTest = 92,
-    GuiqiangTest = 93,
-    HatumTestUI = 94,
-    EllenTest = 95,
-    GMDisplayUIText = 96,
-    EnumMax = 97,
-    EUIPageID_MAX = 98,
+    Map = 87,
+    DebugMap = 88,
+    MusicExport = 89,
+    BossReChallengeMain = 90,
+    BossIterationsMain = 91,
+    BossRushSettlement = 92,
+    BossRushTime = 93,
+    BossIterationsAward = 94,
+    BossRushStartFight = 95,
+    MiniGM = 96,
+    GMConfirm = 97,
+    GMCommTips = 98,
+    ReportBugPanel = 99,
+    UITexConfigCheck = 100,
+    HexRoomTest = 101,
+    GuiqiangTest = 102,
+    HatumTestUI = 103,
+    EllenTest = 104,
+    GMDisplayUIText = 105,
+    EnumMax = 106,
+    EUIPageID_MAX = 107,
 }
 
 ---@enum EUIPageType
@@ -3090,7 +3117,12 @@ EUIPageType = {
     PastMemory = 35,
     SoundtrackV2 = 36,
     EndCredits = 37,
-    EUIPageType_MAX = 38,
+    Map = 38,
+    BossRushSettlement = 39,
+    BossRushReChallenge = 40,
+    BossRushIterations = 41,
+    BossRushIterationsAward = 42,
+    EUIPageType_MAX = 43,
 }
 
 ---@enum EUISettingConfigName
@@ -3317,6 +3349,14 @@ GateStateMachineType = {
     GateStateMachineType_MAX = 2,
 }
 
+---@enum GeoAreaState
+GeoAreaState = {
+    Disable = 0,
+    Explored = 1,
+    Actived = 2,
+    GeoAreaState_MAX = 3,
+}
+
 ---@enum GetTamerMethod
 GetTamerMethod = {
     Use_DA = 0,
@@ -3353,7 +3393,10 @@ GlobalTravelLevelType = {
     BenchMark = 15,
     SeamlessStartNewGame = 16,
     BackToMainMenuFullBlack = 17,
-    GlobalTravelLevelType_MAX = 18,
+    EnterBossRush = 18,
+    LeaveBossRush = 19,
+    BackToMainMenuBossRush = 20,
+    GlobalTravelLevelType_MAX = 21,
 }
 
 ---@enum GroupPatrolType
@@ -3382,14 +3425,6 @@ HitAltFxAnimalRotType = {
     RotToPlayer = 4,
     RotToPlayerSurround = 5,
     HitAltFxAnimalRotType_MAX = 6,
-}
-
----@enum HitMoveDir
-HitMoveDir = {
-    Default = 0,
-    XAxisHitMove = 1,
-    YAxisHitMove = 2,
-    HitMoveDir_MAX = 3,
 }
 
 ---@enum IdleProcessActionType
@@ -3467,7 +3502,8 @@ InputMappingContextTagV2 = {
     BattleTriggerUI = 24,
     Vigor = 25,
     GM = 26,
-    InputMappingContextTagV2_MAX = 27,
+    Map = 27,
+    InputMappingContextTagV2_MAX = 28,
 }
 
 ---@enum InputTipsType
@@ -3501,6 +3537,8 @@ InputTipsType = {
     Bag_ItemConfiging_NotConfig = 65,
     Bag_ItemConfiging_HadConfig = 66,
     Bag_ItemConfiging_CurConfig = 67,
+    Bag_OnlyConfig = 68,
+    Bag_ItemConfiging_OnlyConfig = 69,
     Shop_CanBuy = 80,
     Shop_CantBuy = 81,
     Shop_Sell = 82,
@@ -3523,6 +3561,7 @@ InputTipsType = {
     Alchemy_Tips = 130,
     TravelNotes_Unfold = 140,
     TravelNotes_Fold = 141,
+    Collection_FoldStory = 142,
     ChapterAward_CameraRoam = 150,
     ChapterAward_CameraRoam_Start = 151,
     ChapterAward_CameraRoam_Middle = 152,
@@ -3554,12 +3593,26 @@ InputTipsType = {
     Setting_Quality = 229,
     Setting_NoConfirm = 230,
     Setting_Confirm = 231,
+    Map_Scan_CurMap_CantSetPin = 232,
+    Map_Scan_CantSetPin = 233,
+    Map_Lock = 234,
+    Map_Scan_CurMap = 235,
+    Map_Scan = 236,
+    Map_Focus_RebirthPoint = 237,
+    Map_Focus_Pin = 238,
+    Map_PinMode = 239,
     EditionAward_Item = 240,
     EditionAward_LongPress = 241,
+    BossRushReChallenge_Unit = 242,
+    BossRushIterations_Unit = 243,
+    BossRushReChallenge_History = 244,
     MeditationPoint_CanPlay = 250,
     MeditationPoint_CantPlay = 251,
     MeditationPoint_Playing = 252,
-    InputTipsType_MAX = 253,
+    BossRushSettlement_None = 253,
+    BossRushSettlement_Confirm = 254,
+    BossRushSettlement_Back = 255,
+    InputTipsType_MAX = 256,
 }
 
 ---@enum InteractActionType
@@ -3572,21 +3625,22 @@ InteractActionType = {
 InteractConstraint = {
     None = 0,
     TransForming = 1,
-    NotFocusEnough = 2,
-    Busy = 3,
-    OtherIsUsing = 4,
-    EnemyAround = 5,
-    CD = 6,
-    Dead = 7,
-    NpcHide = 8,
-    ConfigMiss = 9,
-    ItemRequireCondition = 10,
-    Restriction = 11,
-    SplineMoving = 12,
-    Interacting = 13,
-    CricketIdle = 14,
-    Other = 15,
-    InteractConstraint_MAX = 16,
+    BossRush = 2,
+    NotFocusEnough = 3,
+    Busy = 4,
+    OtherIsUsing = 5,
+    EnemyAround = 6,
+    CD = 7,
+    Dead = 8,
+    NpcHide = 9,
+    ConfigMiss = 10,
+    ItemRequireCondition = 11,
+    Restriction = 12,
+    SplineMoving = 13,
+    Interacting = 14,
+    CricketIdle = 15,
+    Other = 16,
+    InteractConstraint_MAX = 17,
 }
 
 ---@enum InteractInfoTemplateType
@@ -3679,7 +3733,8 @@ LevelTag = {
     Party = 1,
     SupportRide = 2,
     SupportOpenMap = 3,
-    LevelTag_MAX = 4,
+    Ending = 4,
+    LevelTag_MAX = 5,
 }
 
 ---@enum LoadingUIFadeInReason
@@ -3847,21 +3902,14 @@ MapCatFlag = {
     CAT_MAX = 16,
 }
 
----@enum MapSymbolLevel
-MapSymbolLevel = {
+---@enum MapSymbolType
+MapSymbolType = {
     EnumMin = 0,
-    CrossFocus = 1,
-    Player = 2,
-    Npc = 3,
-    RebirthPoint = 4,
-    Stupa = 5,
-    GodTower = 6,
-    StrongHold = 7,
-    CaveEntrance = 8,
-    Challenge = 9,
-    Desc = 10,
-    EnumMax = 11,
-    MapSymbolLevel_MAX = 12,
+    Player = 1,
+    Npc = 2,
+    RebirthPoint = 3,
+    Pin = 4,
+    EnumMax = 5,
 }
 
 ---@enum MatPainterType
@@ -4139,7 +4187,14 @@ ObModeSource = {
     EquipFabaoSwitch = 40,
     EquipAccessorySwitch = 41,
     MedicineRecipeSwitch = 42,
-    ObModeSource_MAX = 43,
+    BossRushSwitch = 43,
+    BossRush1 = 44,
+    BossRush2 = 45,
+    BossRush3 = 46,
+    BossRush4 = 47,
+    BossRush5 = 48,
+    BossRush6 = 49,
+    ObModeSource_MAX = 50,
 }
 
 ---@enum ObserveConditionType
@@ -5302,13 +5357,14 @@ TargetSourceType = {
     Target_AIStrongPerception = 35,
     AO_AORangeFind = 36,
     AO_SetByTarget = 37,
-    Combo_NormalUse = 38,
-    Combo_Update = 39,
-    SkillBase_NormalUse = 40,
-    SkillBase_SetByCombo = 41,
-    SkillBase_SetByAI = 42,
-    Target_AutoMoveTo = 43,
-    TargetSourceType_MAX = 44,
+    AO_SetBySkillBaseTarget = 38,
+    Combo_NormalUse = 39,
+    Combo_Update = 40,
+    SkillBase_NormalUse = 41,
+    SkillBase_SetByCombo = 42,
+    SkillBase_SetByAI = 43,
+    Target_AutoMoveTo = 44,
+    TargetSourceType_MAX = 45,
 }
 
 ---@enum TaskCollectionState
@@ -5383,7 +5439,8 @@ TeleportTypeV2 = {
     NextChapter = 4,
     RebirthPointTeleportOnly = 5,
     PrologueCompleted = 6,
-    TeleportTypeV2_MAX = 7,
+    BossRush = 7,
+    TeleportTypeV2_MAX = 8,
 }
 
 ---@enum TextColorType
@@ -5562,7 +5619,9 @@ TransitionConditionType_Guide = {
     FinishGuideGroup = 19,
     ObserveSequence = 20,
     OwningItem = 21,
-    TransitionConditionType_MAX = 22,
+    OldPlayerForUnlockMap = 22,
+    NewPlayerForUnlockMap = 23,
+    TransitionConditionType_MAX = 24,
 }
 
 ---@enum TransitionConditionType_Idle

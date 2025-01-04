@@ -1927,6 +1927,10 @@ function UBGUBounceCheckObject:BindBounceEvent(ProjectileMovementComp) end
 ---@field bIsAI boolean
 ---@field MovementModeChangeTimeInOneFrame int32
 ---@field MovementModeChangeTimeInOneFrame_MutilTimes int32
+---@field HitMoveWeight float
+---@field HitMoveIsEnabled boolean
+---@field HitMoveIsUnmovable boolean
+---@field HitMoveCanUpdate boolean
 ---@field MoveStartHistoryZDeltaNum_NavWalkOpt int32
 ---@field MoveEndHistoryZDeltaNum_NavWalkOpt int32
 ---@field ZDeltaThrehold_NavWalkOpt float
@@ -1966,6 +1970,15 @@ function UBGUCharacterMovementComponent:SetNavWalkOptMassiveMode(bMassiveOpt) en
 function UBGUCharacterMovementComponent:SetNavWalkOptLevel(NewLevel) end
 ---@param JumpOff boolean
 function UBGUCharacterMovementComponent:SetJumpOffState(JumpOff) end
+---@param Actor AActor
+---@param RemoveIgnoredActor boolean
+function UBGUCharacterMovementComponent:SetHitMoveIgnoredActor(Actor, RemoveIgnoredActor) end
+---@param ShapeComp UShapeComponent
+---@param IsEnabled boolean
+function UBGUCharacterMovementComponent:SetHitMoveCollisionEnabled(ShapeComp, IsEnabled) end
+---@param ShapeComp UShapeComponent
+---@param HitMoveDir EHitMoveDir
+function UBGUCharacterMovementComponent:SetHitMoveCollisionDirection(ShapeComp, HitMoveDir) end
 function UBGUCharacterMovementComponent:SetGravityToJumpOffGravity() end
 ---@param bEnable boolean
 function UBGUCharacterMovementComponent:SetEnableSimplePhysWalkCollision(bEnable) end
@@ -1986,14 +1999,24 @@ function UBGUCharacterMovementComponent:IsUseSeparateBrakingFriction() end
 function UBGUCharacterMovementComponent:IsInNavWalkOptMode() end
 ---@return boolean
 function UBGUCharacterMovementComponent:IsInJumpOffAdjust() end
+function UBGUCharacterMovementComponent:HitMoveUpdate() end
 ---@return boolean
 function UBGUCharacterMovementComponent:HasAnimRootMotion_CS() end
 ---@return float
 function UBGUCharacterMovementComponent:GetTopZInFalling() end
+---@param ShapeComp UShapeComponent
+---@param IsEnabled boolean
+---@return boolean
+function UBGUCharacterMovementComponent:GetHitMoveCollisionIsEnabled(ShapeComp, IsEnabled) end
 function UBGUCharacterMovementComponent:CustomJumpMoveBreak() end
 function UBGUCharacterMovementComponent:ClearTopZInFalling() end
+function UBGUCharacterMovementComponent:ClearHitMoveCollisions() end
 ---@return boolean
 function UBGUCharacterMovementComponent:CanGetNormalAndSurfaceTypeInfoFromMovement() end
+---@param ShapeComp UShapeComponent
+---@param HitMoveDir EHitMoveDir
+---@param IsEnabled boolean
+function UBGUCharacterMovementComponent:AddOrModifyHitMoveCollision(ShapeComp, HitMoveDir, IsEnabled) end
 
 
 ---@class UBGUCrowdFollowingComponent : UGSCrowdFollowingComponent
@@ -3722,6 +3745,10 @@ function UBGUWCStreamingFuncLib:GetLevelNamesByKeyword(InWorldContext, InLevelNa
 ---@return int32
 function UBGUWCStreamingFuncLib:GetLevelNames(InWorldContext, OutLevelNames) end
 ---@param InWorldContext UObject
+---@param OutLevelNames TArray<FString>
+---@return int32
+function UBGUWCStreamingFuncLib:GetLevelFullNames(InWorldContext, OutLevelNames) end
+---@param InWorldContext UObject
 ---@param LevelNames TArray<FString>
 ---@param OutLevelStreamingList TMap<FString, uint8>
 ---@param OutCosideredUpdateSet TSet<FString>
@@ -3871,6 +3898,14 @@ function UBGWCameraGroupVolumeManager:Get(WorldContext) end
 UBGWCellSpacePartitionSubSystem = {}
 
 
+---@class UBGWConfigDataAsset : UBGWDataAsset
+UBGWConfigDataAsset = {}
+
+---@param MemberName FString
+---@param PropertyName FString
+function UBGWConfigDataAsset:OnPropertyChanged(MemberName, PropertyName) end
+
+
 ---@class UBGWCppExport : UBlueprintFunctionLibrary
 UBGWCppExport = {}
 
@@ -3988,6 +4023,8 @@ function UBGWGameInstance:RegisterLoadingTipsMask(MaskTexture) end
 function UBGWGameInstance:RegisterLoadingTipsInfo(TipsInfo) end
 ---@param ChapterInfo FChapterInfo
 function UBGWGameInstance:RegisterChapterInfo(ChapterInfo) end
+---@param BossRushInfo FBossRushInfo
+function UBGWGameInstance:RegisterBossRushInfo(BossRushInfo) end
 ---@param DeltaSeconds float
 ---@param TickGroup int32
 function UBGWGameInstance:ReceiveTickEvenWhenPaused(DeltaSeconds, TickGroup) end

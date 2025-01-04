@@ -26,8 +26,9 @@ function UGSFileHelper:FindFilesRecursively(Directory, FoundFiles, FileExtension
 ---@param FileExtension FString
 function UGSFileHelper:FindFiles(Directory, FoundFiles, FileExtension) end
 ---@param Filename FString
+---@param IsStandardPath boolean
 ---@return int64
-function UGSFileHelper:FileSize(Filename) end
+function UGSFileHelper:FileSize(Filename, IsStandardPath) end
 ---@param Filename FString
 ---@return boolean
 function UGSFileHelper:FileExists(Filename) end

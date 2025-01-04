@@ -4,6 +4,7 @@
 ---@field SizeX int32
 ---@field SizeY int32
 ---@field ColorData TArray<FColor>
+---@field FloatColorData TArray<FLinearColor>
 UTexAlphaDataAsset = {}
 
 

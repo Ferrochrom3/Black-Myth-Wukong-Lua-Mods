@@ -1929,6 +1929,24 @@ function ABWS_EnvInteractiveCapture:AddInteractor(PrimComp, InteractiveType, Siz
 function ABWS_EnvInteractiveCapture:RemoveInteractor(InteractorID) end
 
 
+---@class ABossRushPlayerStart : AActor
+---@field bModifyLevelTag boolean
+---@field LevelTag FName
+---@field UseType BossRushPlayerStartType
+---@field SceneComponent USceneComponent
+---@field ArrowComponent UArrowComponent
+ABossRushPlayerStart = {}
+
+
+
+---@class ABossRushPlayerStart_Group : ABossRushPlayerStart
+ABossRushPlayerStart_Group = {}
+
+
+---@class ABossRushPlayerStart_Single : ABossRushPlayerStart
+ABossRushPlayerStart_Single = {}
+
+
 ---@class ADisoLib_EditorSGDTool : ABGUPlacedEditorUtilityBase
 ---@field BoneNameList TArray<FName>
 ---@field CurBoneName FName
@@ -4407,6 +4425,26 @@ FBossPhaseInfo = {}
 
 
 
+---@class FBossRushBattleConfigForGroup
+---@field OverrideLevelNumericalStrength int32
+---@field OverridePropertyCollections TArray<FTamerOverridePropertyCollection>
+---@field OverrideServantExtendID TArray<FServantOverridePropertyCollection>
+FBossRushBattleConfigForGroup = {}
+
+
+
+---@class FBossRushLevelState
+---@field LevelName FString
+---@field bModify boolean
+---@field bHasSeqControl boolean
+---@field bHasKeywords boolean
+---@field OriginLevelState LevelLoadState
+---@field ModifyLevelState LevelLoadState
+---@field SeqControlLevelState LevelLoadState
+FBossRushLevelState = {}
+
+
+
 ---@class FBtlBGMBPConfig
 ---@field bDisableBattleBGM boolean
 ---@field TransMusicConfig TransMusicConfig
@@ -5173,6 +5211,15 @@ FDistanceTest = {}
 ---@field SpawnWorldTransform FTransform
 ---@field TriggerSpawnActor AActor
 FDynamicTamerSpawnReq = {}
+
+
+
+---@class FEaseFuncParams
+---@field AnimEaseFunc ENGSEasingFunc
+---@field Param float
+---@field BlendExp float
+---@field Steps int32
+FEaseFuncParams = {}
 
 
 
@@ -6059,6 +6106,12 @@ FGamepadCustomizedInputDetailConfig = {}
 
 
 
+---@class FGeoAreaIdListInfo
+---@field AreaIdList TArray<int32>
+FGeoAreaIdListInfo = {}
+
+
+
 ---@class FGlobalFXConfigInfo
 ---@field FXTemplate UNiagaraSystem
 ---@field FXTag FGameplayTag
@@ -6630,6 +6683,16 @@ FManagedTaskUnit = {}
 
 
 
+---@class FMapAnimParams
+---@field AnimCountLimit int32
+---@field AnimMinTime float
+---@field AnimMaxTime float
+---@field TimeEaseFuncParams FEaseFuncParams
+---@field EaseFuncParams FEaseFuncParams
+FMapAnimParams = {}
+
+
+
 ---@class FMapAttrNode
 ---@field BlockCatDir MapCatFlag
 ---@field IsPointBlock boolean
@@ -6646,9 +6709,9 @@ FMapAttrNode = {}
 ---@field Friction float
 ---@field MinScale float
 ---@field MaxScale float
----@field IsCanSelect boolean
 ---@field SelectedScale float
 ---@field MinCanShowScale float
+---@field MaxCanShowScale float
 FMapLevelConfig = {}
 
 
@@ -6682,6 +6745,18 @@ FMapPointData = {}
 ---@field MapType ProceduralMapType
 ---@field PathCount uint16
 FMapProceduralInfo = {}
+
+
+
+---@class FMapSpriteConfig
+---@field MoveRangeOffset FVector2D
+---@field MinScale float
+---@field MaxScale float
+---@field SelectedScale float
+---@field MapLevelCommConfig FMapLevelConfig
+---@field MapLevelDescConfig FMapLevelConfig
+---@field PaperMaskIndex int32
+FMapSpriteConfig = {}
 
 
 
@@ -7563,7 +7638,15 @@ FSeqSimpleStatePair = {}
 
 
 
+---@class FServantOverridePropertyCollection
+---@field SummonID int32
+---@field BattleExtendID int32
+FServantOverridePropertyCollection = {}
+
+
+
 ---@class FServantReq
+---@field SummonID int32
 ---@field SummonInstanceID FCalliopeGuid
 ---@field ServantTamerGuid FString
 ---@field Summoner AActor
@@ -7977,6 +8060,13 @@ FTamerInfo_ForAbnormal = {}
 
 
 
+---@class FTamerOverridePropertyCollection
+---@field Unit FGsSmartParam
+---@field BattleExtendID int32
+FTamerOverridePropertyCollection = {}
+
+
+
 ---@class FTamerRoleSync
 ---@field Guid FString
 ---@field SyncState ClientTamerInitNetState
@@ -8024,6 +8114,13 @@ FTaskQueryConditionInfo = {}
 ---@field TaskStageConditionType TaskStageConditionType
 ---@field CustomConditionDisplayName FName
 FTaskStageConditionInfo = {}
+
+
+
+---@class FTeleportParam_BossRush
+---@field LevelID int32
+---@field LoadingScreenType EGSLoadingScreenType
+FTeleportParam_BossRush = {}
 
 
 
@@ -8722,22 +8819,24 @@ UAutoTestHelperLib = {}
 ---@param WorldContext UObject
 function UAutoTestHelperLib:Jump(WorldContext) end
 ---@param WorldContext UObject
+function UAutoTestHelperLib:Spin(WorldContext) end
+---@param WorldContext UObject
 function UAutoTestHelperLib:Dodge(WorldContext) end
+---@param WorldContext UObject
+---@param ItemPosition int32
+function UAutoTestHelperLib:UseItem(WorldContext, ItemPosition) end
 ---@param WorldContext UObject
 ---@param IsOpen boolean
 function UAutoTestHelperLib:OpenBag(WorldContext, IsOpen) end
----@param WorldContext UObject
-function UAutoTestHelperLib:TestCode(WorldContext) end
+---@param Unit AActor
+function UAutoTestHelperLib:SetMaxHp(Unit) end
 ---@param WorldContext UObject
 ---@param Text FString
 ---@param bNeedClick boolean
 ---@return boolean
 function UAutoTestHelperLib:FindText(WorldContext, Text, bNeedClick) end
----@param World UWorld
----@param ActorClass TSubclassOf<AActor>
-function UAutoTestHelperLib:GenActor(World, ActorClass) end
----@param Unit AActor
-function UAutoTestHelperLib:SetMaxHp(Unit) end
+---@param WorldContext UObject
+function UAutoTestHelperLib:TestCode(WorldContext) end
 ---@param WorldContext UObject
 ---@param SpellID int32
 ---@return boolean
@@ -8745,9 +8844,9 @@ function UAutoTestHelperLib:HasSpell(WorldContext, SpellID) end
 ---@param WorldContext UObject
 ---@return boolean
 function UAutoTestHelperLib:Interact(WorldContext) end
----@param WorldContext UObject
----@param SkillType SpellType
-function UAutoTestHelperLib:CastSpell(WorldContext, SkillType) end
+---@param World UWorld
+---@param ActorClass TSubclassOf<AActor>
+function UAutoTestHelperLib:GenActor(World, ActorClass) end
 ---@param Unit AActor
 ---@param Status boolean
 function UAutoTestHelperLib:QAPauseBT(Unit, Status) end
@@ -8755,36 +8854,43 @@ function UAutoTestHelperLib:QAPauseBT(Unit, Status) end
 ---@param KillTarget AActor
 function UAutoTestHelperLib:KillEnemy(WorldContext, KillTarget) end
 ---@param WorldContext UObject
+---@param SkillType SpellType
+function UAutoTestHelperLib:CastSpell(WorldContext, SkillType) end
+---@param WorldContext UObject
 ---@param Enemy ABGUCharacterCS
 ---@param ReachRadius int32
 ---@return boolean
 function UAutoTestHelperLib:RunToEnemy(WorldContext, Enemy, ReachRadius) end
+---@param WorldContext UObject
+function UAutoTestHelperLib:MouseGoBack(WorldContext) end
 ---@param Btn UWidget
 function UAutoTestHelperLib:ClickButton(Btn) end
 ---@param WorldContext UObject
-function UAutoTestHelperLib:LightAttack(WorldContext) end
----@param WorldContext UObject
 function UAutoTestHelperLib:HeavyAttack(WorldContext) end
 ---@param WorldContext UObject
-function UAutoTestHelperLib:MouseGoBack(WorldContext) end
+function UAutoTestHelperLib:LightAttack(WorldContext) end
 ---@param Unit AActor
 ---@param Hp int32
 function UAutoTestHelperLib:SetCurrentHp(Unit, Hp) end
 ---@param WorldContext UObject
+function UAutoTestHelperLib:MagicArtifact(WorldContext) end
+---@param WorldContext UObject
 ---@param OwnerActor AActor
 function UAutoTestHelperLib:RemoveGroupAI(WorldContext, OwnerActor) end
+---@param ID int32
+---@return FString
+function UAutoTestHelperLib:ReadDataTable(ID) end
+---@param WorldContext UObject
+---@param ItemId int32
+---@return int32
+function UAutoTestHelperLib:HasItemNumber(WorldContext, ItemId) end
+---@param WorldContext UObject
+function UAutoTestHelperLib:UseVigorSkill(WorldContext) end
 ---@param WorldContext UObject
 ---@param TargetLocation FVector
 ---@param ReachRadius int32
 ---@return boolean
 function UAutoTestHelperLib:RunToPosition(WorldContext, TargetLocation, ReachRadius) end
----@param WorldContext UObject
----@param ItemId int32
----@return int32
-function UAutoTestHelperLib:HasItemNumber(WorldContext, ItemId) end
----@param ID int32
----@return FString
-function UAutoTestHelperLib:ReadDataTable(ID) end
 ---@param WorldContext UObject
 ---@param AttackRadius int32
 ---@param EnemyUnit ABGUCharacterCS
@@ -8796,12 +8902,14 @@ function UAutoTestHelperLib:FindNearbyUnit(WorldContext, AttackRadius, EnemyUnit
 function UAutoTestHelperLib:IsUnitInBattle(Unit) end
 ---@param World UWorld
 function UAutoTestHelperLib:GenShiXianFeng(World) end
----@param Enemy ABGUCharacterCS
----@return boolean
-function UAutoTestHelperLib:CanUnitBeTarget(Enemy) end
 ---@param Unit AActor
 ---@param AttackNum int32
 function UAutoTestHelperLib:SetPlayerAttack(Unit, AttackNum) end
+---@param Enemy ABGUCharacterCS
+---@return boolean
+function UAutoTestHelperLib:CanUnitBeTarget(Enemy) end
+---@param WorldContext UObject
+function UAutoTestHelperLib:DrinkBloodBottom(WorldContext) end
 ---@param Unit AActor
 ---@param SkillID int32
 ---@param Duration float
@@ -8815,12 +8923,12 @@ function UAutoTestHelperLib:AutoMoveComplete(WorldContext) end
 ---@param SpellID int32
 ---@return boolean
 function UAutoTestHelperLib:IsEquippingSpell(WorldContext, SpellID) end
----@param Unit AActor
----@return TArray<int32>
-function UAutoTestHelperLib:GetUnitAllSkillID(Unit) end
 ---@param StringList TArray<FString>
 ---@return TArray<FString>
 function UAutoTestHelperLib:QAStringArraySort(StringList) end
+---@param Unit AActor
+---@return TArray<int32>
+function UAutoTestHelperLib:GetUnitAllSkillID(Unit) end
 ---@param Target AActor
 ---@return FString
 function UAutoTestHelperLib:QAGetCurrentAMName(Target) end
@@ -8836,12 +8944,12 @@ function UAutoTestHelperLib:GetTamerInViewCount(WorldContext) end
 ---@return ABGUCharacterCS
 function UAutoTestHelperLib:GetPlayerTargetActor(WorldContext) end
 ---@param WorldContext UObject
+---@return boolean
+function UAutoTestHelperLib:IsPlayingCameraMovie(WorldContext) end
+---@param WorldContext UObject
 ---@param SequenceID int32
 ---@return boolean
 function UAutoTestHelperLib:GetPlayingSequenceID(WorldContext, SequenceID) end
----@param WorldContext UObject
----@return boolean
-function UAutoTestHelperLib:IsPlayingCameraMovie(WorldContext) end
 ---@param WorldContext UObject
 ---@param ActorName FString
 ---@param ActorLocation FVector
@@ -11208,6 +11316,7 @@ function UBANS_GSCollisionResponseToChannel:GetCollisionChannelIndex_Capsule() e
 
 
 ---@class UBANS_GSComboKeyCache : UBANS_GSBase
+---@field GroupId int32
 UBANS_GSComboKeyCache = {}
 
 ---@param NotifyParam FUStGSNotifyParam
@@ -11221,6 +11330,7 @@ function UBANS_GSComboKeyCache:GSNotifyBeginCS(NotifyParam, TotalDuration) end
 ---@field HitFailedSkillInfoList TArray<FHitModifySkillScoreInfo>
 ---@field WhiteListComboSkillID TArray<int32>
 ---@field BlackListComboSkillID TArray<int32>
+---@field GroupId int32
 UBANS_GSComboWindow = {}
 
 ---@return EGsEnAnimNS
@@ -11448,7 +11558,7 @@ function UBANS_GSHiddenBossBar:GSNotifyBeginCS(NotifyParam, TotalDuration) end
 ---@field NeedUpdateScale boolean
 ---@field NeedSetRelaLocForScale boolean
 ---@field NeedUpdateRadius boolean
----@field HitMoveDir HitMoveDir
+---@field HitMoveDir EHitMoveDir
 UBANS_GSHitMoveCollisionScale = {}
 
 ---@param NotifyParam FUStGSNotifyParam
@@ -13868,6 +13978,15 @@ function UBAN_GSTriggerEffect:GSValidateInputCS(Actor) end
 function UBAN_GSTriggerEffect:bIsNativeBranchingPointCS() end
 
 
+---@class UBAN_GSTriggerOpenMap : UBAN_GSBase
+UBAN_GSTriggerOpenMap = {}
+
+---@param NotifyParam FUStGSNotifyParam
+function UBAN_GSTriggerOpenMap:GSNotifyCS(NotifyParam) end
+---@return boolean
+function UBAN_GSTriggerOpenMap:bIsNativeBranchingPointCS() end
+
+
 ---@class UBAN_GSTriggerSplineMoveDBC : UBAN_GSBase
 UBAN_GSTriggerSplineMoveDBC = {}
 
@@ -14648,6 +14767,170 @@ UBED_Behavior_CheckCurrentCastSkillId = {}
 function UBED_Behavior_CheckCurrentCastSkillId:PostPropertyChanged(MemberName, PropertyName) end
 
 
+---@class UBED_BossRushAsset : UBED_CalliopeAssetBase
+---@field bCheck1 boolean
+---@field bCheck2 boolean
+---@field bCheck3 boolean
+---@field bCheck4 boolean
+---@field bCheck5 boolean
+---@field bCheck6 boolean
+---@field bRefreshLevel boolean
+---@field bCanModifyPersistentLevel boolean
+---@field PersistentLevel FGsSmartParam
+---@field LevelTag FName
+---@field BossRushLevelsLoadSetting TArray<FBossRushLevelState>
+---@field GeometryLevelsLoadSetting TArray<FBossRushLevelState>
+---@field SeqLevelsLoadSetting TArray<FBossRushLevelState>
+---@field ItemLevelsLoadSetting TArray<FBossRushLevelState>
+---@field LightLevelsLoadSetting TArray<FBossRushLevelState>
+---@field SupportLevelsLoadSetting TArray<FBossRushLevelState>
+---@field OtherLevelsLoadSetting TArray<FBossRushLevelState>
+---@field MonsterLevelsLoadSetting TArray<FBossRushLevelState>
+---@field bRefreshSeqLevelState boolean
+---@field RelationSeqLevelList TArray<FString>
+---@field bRefreshPlayerStart boolean
+---@field PlayerStartForSingle FTransform
+---@field PlayerStartForGroup FTransform
+---@field bSyncTamerList boolean
+---@field GroupConfigs TMap<int32, FBossRushBattleConfigForGroup>
+---@field OverrideDeadDelayDestroyTime TMap<int32, float>
+---@field bNote boolean
+---@field bOpenNeedLevel boolean
+UBED_BossRushAsset = {}
+
+---@return boolean
+function UBED_BossRushAsset:HasRevertCondition() end
+---@return ECalliopeViewType
+function UBED_BossRushAsset:GetViewType() end
+---@return boolean
+function UBED_BossRushAsset:IsEditorOnlyCS() end
+---@return boolean
+function UBED_BossRushAsset:CanManageStates() end
+---@return UClass
+function UBED_BossRushAsset:GetStartNodeClass() end
+---@param MemberName FString
+---@param PropertyName FString
+function UBED_BossRushAsset:OnPropertyChanged(MemberName, PropertyName) end
+function UBED_BossRushAsset:OnRefreshAssetInCS() end
+---@return UClass
+function UBED_BossRushAsset:GetRerouteNodeClass() end
+---@param ParentPropertyName FString
+---@param PropertyName FString
+---@param OutParamArray TArray<FCalliopeGuid>
+---@return boolean
+function UBED_BossRushAsset:GetPossibleParamsCS(ParentPropertyName, PropertyName, OutParamArray) end
+function UBED_BossRushAsset:PostRefreshAssetInCS() end
+---@param PropertyName FString
+---@param InConfigGuid FCalliopeGuid
+---@param OutDisplayName FString
+---@return boolean
+function UBED_BossRushAsset:GetParamDisplayNameCS(PropertyName, InConfigGuid, OutDisplayName) end
+---@param OutClasses TArray<UClass>
+---@return int32
+function UBED_BossRushAsset:GetExtraDefaultInputNodes(OutClasses) end
+---@param OutClasses TArray<UClass>
+---@return int32
+function UBED_BossRushAsset:GetExtraDefaultOutputNodes(OutClasses) end
+
+
+---@class UBED_BossRushNode : UBED_CalliopeNodeBae
+UBED_BossRushNode = {}
+
+---@param InViewType ECalliopeViewType
+---@return boolean
+function UBED_BossRushNode:IsSupportViewType(InViewType) end
+function UBED_BossRushNode:OnRefreshAssetInCS() end
+
+
+---@class UBED_BossRushNode_Battle : UBED_BossRushNode_TemplateBase
+---@field StartCondition FBattleStartCondition
+---@field BattleStartActiveList FUnitsAndSpawners
+---@field TransitionConditions TArray<FCompositeTransitionCondition_Battle>
+UBED_BossRushNode_Battle = {}
+
+---@return TArray<FName>
+function UBED_BossRushNode_Battle:GetContextOutputsInCS() end
+
+
+---@class UBED_BossRushNode_End : UBED_BossRushNode
+UBED_BossRushNode_End = {}
+
+
+---@class UBED_BossRushNode_GroupStart : UBED_BossRushNode
+---@field GroupName FName
+UBED_BossRushNode_GroupStart = {}
+
+---@return FString
+function UBED_BossRushNode_GroupStart:GetNodeDescriptionInCS() end
+
+
+---@class UBED_BossRushNode_Idle : UBED_BossRushNode_TemplateBase
+---@field TransitionConditions TArray<FCompositeTransitionCondition_Idle>
+---@field ProcessActions TArray<FIdleProcessAction>
+---@field bUseResetPin boolean
+UBED_BossRushNode_Idle = {}
+
+---@param MemberName FString
+---@param PropertyName FString
+function UBED_BossRushNode_Idle:PostPropertyChanged(MemberName, PropertyName) end
+---@return TArray<FName>
+function UBED_BossRushNode_Idle:GetContextOutputsInCS() end
+
+
+---@class UBED_BossRushNode_Initial : UBED_BossRushNode
+UBED_BossRushNode_Initial = {}
+
+
+---@class UBED_BossRushNode_Reroute : UBED_BossRushNode
+UBED_BossRushNode_Reroute = {}
+
+
+---@class UBED_BossRushNode_ResetGroup : UBED_BossRushNode_TemplateBase
+---@field GroupName FName
+---@field TransitionConditions TArray<FCompositeTransitionCondition_Group>
+UBED_BossRushNode_ResetGroup = {}
+
+function UBED_BossRushNode_ResetGroup:OnRefreshAssetInCS() end
+---@return TArray<FName>
+function UBED_BossRushNode_ResetGroup:GetContextOutputsInCS() end
+---@return FString
+function UBED_BossRushNode_ResetGroup:GetNodeDescriptionInCS() end
+
+
+---@class UBED_BossRushNode_Story : UBED_BossRushNode_TemplateBase
+---@field MatchPositionType SequenceBlendInMatchPositionType
+---@field Overlap FGsSmartParam
+---@field bWaitPlayFinish boolean
+---@field Sequence FGsSmartParam
+---@field SequenceID int32
+---@field bGainItemWhenFinish boolean
+---@field GainItems TArray<FGainItemConfig>
+---@field bChapterEndStory boolean
+---@field ChapterID int32
+---@field bTriggerTransBack boolean
+---@field bTriggerMonsterGoHome boolean
+---@field bDisablePlayerControl boolean
+---@field bDisableMovementInput boolean
+---@field bDisableLookAtInput boolean
+---@field bHidePlayer boolean
+---@field bHideHud boolean
+UBED_BossRushNode_Story = {}
+
+---@return FString
+function UBED_BossRushNode_Story:GetNodeDescriptionInCS() end
+
+
+---@class UBED_BossRushNode_TemplateBase : UBED_BossRushNode
+UBED_BossRushNode_TemplateBase = {}
+
+---@return TArray<FName>
+function UBED_BossRushNode_TemplateBase:GetContextOutputsInCS() end
+
+
+---@class UBED_BossRushNode_Wait : UBED_BossRushNode_TemplateBase
+UBED_BossRushNode_Wait = {}
+
+
 ---@class UBED_CalliopeAssetBase : UCalliopeAsset
 UBED_CalliopeAssetBase = {}
 
@@ -14674,15 +14957,15 @@ function UBED_CalliopeAssetBase:GetNode(InGuid) end
 function UBED_CalliopeAssetBase:GetNodes() end
 ---@return ECalliopeViewType
 function UBED_CalliopeAssetBase:GetViewType() end
+---@return boolean
+function UBED_CalliopeAssetBase:ExportToData() end
 ---@param NewGuid FCalliopeGuid
 ---@param NewNode UCalliopeNode
 function UBED_CalliopeAssetBase:RegisterNode(NewGuid, NewNode) end
----@return boolean
-function UBED_CalliopeAssetBase:ExportToData() end
----@param NodeGuid FCalliopeGuid
-function UBED_CalliopeAssetBase:UnregisterNode(NodeGuid) end
 ---@param Node UCalliopeNode
 function UBED_CalliopeAssetBase:OnNodeActivate(Node) end
+---@param NodeGuid FCalliopeGuid
+function UBED_CalliopeAssetBase:UnregisterNode(NodeGuid) end
 ---@return TArray<FName>
 function UBED_CalliopeAssetBase:GetCustomInputs() end
 ---@param Node UCalliopeNode
@@ -19153,11 +19436,11 @@ function UBGS_GSEventCollection:Evt_TeamWipeOut_Multicast_Invoke() end
 ---@param b1 boolean
 ---@param p2 int32
 function UBGS_GSEventCollection:Evt_BGS_TriggerShortcutMultiCast(b1, p2) end
+---@param AkEvent UAkAudioEvent
+function UBGS_GSEventCollection:Evt_PostMulticastAkEventMultiCast(AkEvent) end
 ---@param UnitGuid FString
 ---@param DeadReason DeadReason
 function UBGS_GSEventCollection:Evt_BGS_UnitDead_Multicast_Invoke(UnitGuid, DeadReason) end
----@param AkEvent UAkAudioEvent
-function UBGS_GSEventCollection:Evt_PostMulticastAkEventMultiCast(AkEvent) end
 function UBGS_GSEventCollection:Evt_CrusadeSuccess_Multicast_Invoke() end
 ---@param PlayerState APlayerState
 function UBGS_GSEventCollection:Evt_BGS_PlayerJoin_Multicast_Invoke(PlayerState) end
@@ -19166,10 +19449,10 @@ function UBGS_GSEventCollection:Evt_BGS_PlayerLogOut_Multicast_Invoke(PlayerStat
 ---@param p1 int32
 function UBGS_GSEventCollection:Evt_BGS_TestGameState_Multicast_Invoke(p1) end
 function UBGS_GSEventCollection:Evt_OnlineDebugInfoEnd_Multicast_Invoke() end
----@param p1 int32
-function UBGS_GSEventCollection:Evt_BGS_ItemFullOnline_Multicast_Invoke(p1) end
 ---@param Exitting AController
 function UBGS_GSEventCollection:Evt_BGS_OnPlayerLogOut_Multicast_Invoke(Exitting) end
+---@param p1 int32
+function UBGS_GSEventCollection:Evt_BGS_ItemFullOnline_Multicast_Invoke(p1) end
 ---@param OldUnit AActor
 ---@param NewlySpawnedUnit AActor
 function UBGS_GSEventCollection:Evt_BGS_OnUnitTransited_Multicast_Invoke(OldUnit, NewlySpawnedUnit) end
@@ -19180,12 +19463,12 @@ function UBGS_GSEventCollection:Evt_BGS_OnPlayerPostLogin_Multicast_Invoke(NewPl
 ---@param TriggerTaunt boolean
 ---@param TargetSourceType TargetSourceType
 function UBGS_GSEventCollection:Evt_BGS_NotifySwitchTarget_Multicast_Invoke(OldTarget, NewTarget, TriggerTaunt, TargetSourceType) end
+---@param p1 int32
+function UBGS_GSEventCollection:Evt_BGS_SwitchTickRateLogic_Multicast_Invoke(p1) end
 ---@param ScreenMsgType ScreenMsgType
 ---@param Msg FString
 ---@param TipsDuration int32
 function UBGS_GSEventCollection:Evt_BGS_SendOnlineScreenMsg_Multicast_Invoke(ScreenMsgType, Msg, TipsDuration) end
----@param p1 int32
-function UBGS_GSEventCollection:Evt_BGS_SwitchTickRateLogic_Multicast_Invoke(p1) end
 ---@param OriginActor AActor
 ---@param CopyActor AActor
 ---@param bRemoveOriginHatredInfo boolean
@@ -20820,6 +21103,12 @@ UBGWDataAsset_AnimationSyncStateConfig = {}
 
 
 
+---@class UBGWDataAsset_Array_TriggerEffectWithCondition : UBGWDataAsset
+---@field Effects TArray<FTriggerEffectWithCondition>
+UBGWDataAsset_Array_TriggerEffectWithCondition = {}
+
+
+
 ---@class UBGWDataAsset_AutoMoveMonitorsConfig : UBGWDataAsset
 ---@field AutoMoveCaptureModes TArray<FAutoMoveMonitorConfigItem>
 ---@field AutoMoveMotionPatterns TArray<FAutoMoveMonitorConfigItem>
@@ -20970,6 +21259,28 @@ UBGWDataAsset_BeImmobilizedConfig = {}
 ---@field BeAttackedBlockInfoWarp FBlockInfoWarp_BeAttacked
 UBGWDataAsset_BlockInfoConfig = {}
 
+
+
+---@class UBGWDataAsset_BossRushLevelConfig : UBGWConfigDataAsset
+---@field BattleReadyTime float
+---@field bRefreshAllLevelList boolean
+---@field PersistentLevelPaths TArray<FString>
+---@field LevelConfigs TArray<UBossRushLevelConfig>
+---@field bClearAllConfig boolean
+---@field bBatchCreateBRLevel boolean
+---@field bRunCustomCreate boolean
+---@field CustomCreateID int32
+---@field bCreateTamer boolean
+---@field bCreateBRGraphAndLevel boolean
+---@field bCheckLevelNameHasRepeatable boolean
+---@field bCheckTamerPlaceLevel boolean
+---@field bFixBRLevelTransactionalActors boolean
+---@field bSetAllBRLevelLayer boolean
+UBGWDataAsset_BossRushLevelConfig = {}
+
+---@param MemberName FString
+---@param PropertyName FString
+function UBGWDataAsset_BossRushLevelConfig:OnPropertyChanged(MemberName, PropertyName) end
 
 
 ---@class UBGWDataAsset_BuffSetCurveValueToMeshConfig : UBGWDataAsset
@@ -21599,6 +21910,12 @@ UBGWDataAsset_ProjectileSpawnConfig = {}
 function UBGWDataAsset_ProjectileSpawnConfig:AboutEffectCaster() end
 
 
+---@class UBGWDataAsset_RebirthGeoInfo : UBGWDataAsset
+---@field RebirthAreaConfig TMap<int32, FGeoAreaIdListInfo>
+UBGWDataAsset_RebirthGeoInfo = {}
+
+
+
 ---@class UBGWDataAsset_RebirthPointNavigation : UBGWDataAsset
 ---@field Template TSubclassOf<AActor>
 ---@field EFXNodeOffsetAll FVector
@@ -22178,10 +22495,11 @@ UBGWHeroIconConfigDataAsset = {}
 
 
 ---@class UBGWMapUIConfigDataAsset : UBGWDataAsset
----@field LevelConfigMap TMap<MapSymbolLevel, FMapLevelConfig>
----@field MinScale float
----@field MaxScale float
----@field MaxMoveRange FVector2D
+---@field SpriteConfigMap TMap<int32, FMapSpriteConfig>
+---@field GamepadScaleRate float
+---@field MouseScaleRate float
+---@field MapUpdateDelayTime float
+---@field MapAnimParams FMapAnimParams
 UBGWMapUIConfigDataAsset = {}
 
 
@@ -22386,6 +22704,14 @@ UBGWUltimateInfoDataAsset = {}
 
 ---@class UBGW_820DemoPlayTimeMgr : UGameInstanceSystemBaseUObj
 UBGW_820DemoPlayTimeMgr = {}
+
+
+---@class UBGW_AssetCollectorUtilMgr : UGameInstanceSystemBaseUObj
+UBGW_AssetCollectorUtilMgr = {}
+
+---@param OutputInfo FString
+---@return boolean
+function UBGW_AssetCollectorUtilMgr:CollectNiagaraAssetsFromPreloadAssetCollectionResult(OutputInfo) end
 
 
 ---@class UBGW_AsyncTaskMgr : UGameInstanceSystemBaseUObj
@@ -22960,6 +23286,7 @@ UBGW_PlayerInput_U3 = {}
 ---@field _CloudMoveConfig UBGWDataAsset_CloudMoveConfig
 ---@field LevelInfo UBGWDataAsset_LevelInfo
 ---@field HitAudioPreloadListConfig UBGWDataAsset_HitAudioPreloadList
+---@field RebirthGeoInfo UBGWDataAsset_RebirthGeoInfo
 ---@field TROConfig_Small UBGWDataAsset_TROConfig
 ---@field TROConfig_Medium UBGWDataAsset_TROConfig
 ---@field TROConfig_MediumBig UBGWDataAsset_TROConfig
@@ -25619,6 +25946,8 @@ UBUI_ButtonCompare = {}
 ---@field StartPressAudioEvent UAkAudioEvent
 ---@field StopPressAudioEvent UAkAudioEvent
 ---@field FinishPressAudioEvent UAkAudioEvent
+---@field UseSliderFreq boolean
+---@field SliderFreqInterval FVector2D
 ---@field SpecialNormalUIDataConfigMap TMap<ButtonUIStat, FFUIData>
 ---@field IsSpecial boolean
 UBUI_ButtonLongPressV2 = {}
@@ -25701,13 +26030,10 @@ UBUI_CursorBase = {}
 
 
 ---@class UBUI_CursorMap : UBUI_Widget
----@field CursorRadius float
----@field RangeRadius float
----@field ScaleCoe float
----@field MousePowerCoe float
 ---@field MovePower float
 ---@field CursorMoveDelay float
 ---@field ToPosSpeed float
+---@field ToScaleSpeed float
 UBUI_CursorMap = {}
 
 
@@ -26171,10 +26497,12 @@ function UBUI_MSimNum:OnShowAnimFinished() end
 UBUI_MagicFieldDebugInfo = {}
 
 
----@class UBUI_MapWidget : UBUI_Widget
-UBUI_MapWidget = {}
+---@class UBUI_MapSprite : UBUI_Widget
+UBUI_MapSprite = {}
 
-function UBUI_MapWidget:Construct() end
+
+---@class UBUI_MapWidget : UBUI_CursorMap
+UBUI_MapWidget = {}
 
 
 ---@class UBUI_Menu : UBUI_DependWidget
@@ -27411,62 +27739,59 @@ UBUS_GSEventCollection = {}
 ---@param PredictionKeyId int32
 ---@param ParentPredictionKeyId int32
 function UBUS_GSEventCollection:Evt_TestPredictServer(PredictionKeyId, ParentPredictionKeyId) end
-function UBUS_GSEventCollection:Evt_TeleportBegin_Invoke() end
+---@param p1 int32
+---@param p2 AActor
+function UBUS_GSEventCollection:Evt_ClientRPCTest_Invoke(p1, p2) end
 ---@param p1 int32
 ---@param p2 FVector
 function UBUS_GSEventCollection:Evt_ServerRPCTest_Invoke(p1, p2) end
 function UBUS_GSEventCollection:Evt_TestPredictMultiCast() end
----@param p1 int32
----@param p2 AActor
-function UBUS_GSEventCollection:Evt_ClientRPCTest_Invoke(p1, p2) end
+function UBUS_GSEventCollection:Evt_TeleportBegin_Invoke() end
+function UBUS_GSEventCollection:Evt_TeleportFinish_Invoke() end
 ---@param UnitState EBGUUnitState
 ---@param NeedForceUpdate boolean
 ---@param Time float
 ---@param PredictionKeyId int32
 ---@param ParentPredictionKeyId int32
 function UBUS_GSEventCollection:Evt_UnitStatePredicServer(UnitState, NeedForceUpdate, Time, PredictionKeyId, ParentPredictionKeyId) end
-function UBUS_GSEventCollection:Evt_TeleportFinish_Invoke() end
+function UBUS_GSEventCollection:Evt_ClearTargetInfo_Invoke() end
 ---@param p1 FString
 function UBUS_GSEventCollection:Evt_InputActionPressServer(p1) end
-function UBUS_GSEventCollection:Evt_ClearTargetInfo_Invoke() end
+---@param PartId int32
+---@param HitHP float
+---@param HitWeight int32
+function UBUS_GSEventCollection:Evt_TriggerHitInPartServer(PartId, HitHP, HitWeight) end
+---@param P TArray<FString>
+function UBUS_GSEventCollection:Evt_ExecuteCommandGMServer(P) end
+---@param EndPlayReason EEndPlayReason::Type
+function UBUS_GSEventCollection:EndPlayInCS(EndPlayReason) end
 ---@param StartJumpDir SkillDirection
 ---@param CurrentInput FVector2D
 ---@param PredictionKeyId int32
 ---@param ParentPredictionKeyId int32
 function UBUS_GSEventCollection:Evt_TriggerJumpSkillServer(StartJumpDir, CurrentInput, PredictionKeyId, ParentPredictionKeyId) end
----@param P TArray<FString>
-function UBUS_GSEventCollection:Evt_ExecuteCommandGMServer(P) end
----@param EndPlayReason EEndPlayReason::Type
-function UBUS_GSEventCollection:EndPlayInCS(EndPlayReason) end
----@param PartId int32
----@param HitHP float
----@param HitWeight int32
-function UBUS_GSEventCollection:Evt_TriggerHitInPartServer(PartId, HitHP, HitWeight) end
----@param FinalGuid FString
----@param NotifyTag FGameplayTag
-function UBUS_GSEventCollection:Evt_NotifyGraphClientServer(FinalGuid, NotifyTag) end
 ---@param p1 float
 function UBUS_GSEventCollection:Evt_RotateToTargetSvrServer(p1) end
-function UBUS_GSEventCollection:Evt_TriggerPlayerRestServer() end
 ---@param ID int32
 ---@param RuleIDList TArray<int32>
 ---@param Reason MontageBindReason
 ---@param SkillDirection SkillDirection
 ---@param bNeedCheckSkillCanCast boolean
+---@param SourceType CastSkillSourceType
 ---@param PredictionKeyId int32
 ---@param ParentPredictionKeyId int32
-function UBUS_GSEventCollection:Evt_SmartCastSkillTryServer(ID, RuleIDList, Reason, SkillDirection, bNeedCheckSkillCanCast, PredictionKeyId, ParentPredictionKeyId) end
+function UBUS_GSEventCollection:Evt_SmartCastSkillTryServer(ID, RuleIDList, Reason, SkillDirection, bNeedCheckSkillCanCast, SourceType, PredictionKeyId, ParentPredictionKeyId) end
 ---@param p1 float
 function UBUS_GSEventCollection:Evt_StopSlotAnimationServer(p1) end
----@param UnitState EBGUUnitState
----@param NeedForceUpdate boolean
----@param Time float
-function UBUS_GSEventCollection:Evt_UnitStatePredicMultiCast(UnitState, NeedForceUpdate, Time) end
----@param p1 FString
-function UBUS_GSEventCollection:Evt_InputActionReleaseServer(p1) end
----@param p1 int32
-function UBUS_GSEventCollection:Evt_ChargeSkillSuccessServer(p1) end
+---@param FinalGuid FString
+---@param NotifyTag FGameplayTag
+function UBUS_GSEventCollection:Evt_NotifyGraphClientServer(FinalGuid, NotifyTag) end
+function UBUS_GSEventCollection:Evt_TriggerPlayerRestServer() end
 function UBUS_GSEventCollection:BeginPlayInCS() end
+---@param Player AActor
+---@param DropId int32
+---@param DropLevel int32
+function UBUS_GSEventCollection:Evt_DropCollectionItemServer(Player, DropId, DropLevel) end
 ---@param BuffID int32
 ---@param Caster AActor
 ---@param RootCaster AActor
@@ -27475,13 +27800,19 @@ function UBUS_GSEventCollection:BeginPlayInCS() end
 ---@param bRecursed boolean
 ---@param BattleAttrSnapShot FBattleAttrSnapShot
 function UBUS_GSEventCollection:Evt_BuffAdd_Multicast_Invoke(BuffID, Caster, RootCaster, Duration, BuffSourceType, bRecursed, BattleAttrSnapShot) end
----@param Player AActor
----@param DropId int32
----@param DropLevel int32
-function UBUS_GSEventCollection:Evt_DropCollectionItemServer(Player, DropId, DropLevel) end
----@param StartJumpDir SkillDirection
----@param CurrentInput FVector2D
-function UBUS_GSEventCollection:Evt_TriggerJumpSkillMultiCast(StartJumpDir, CurrentInput) end
+---@param UnitState EBGUUnitState
+---@param NeedForceUpdate boolean
+---@param Time float
+function UBUS_GSEventCollection:Evt_UnitStatePredicMultiCast(UnitState, NeedForceUpdate, Time) end
+---@param p1 FString
+function UBUS_GSEventCollection:Evt_InputActionReleaseServer(p1) end
+---@param p1 int32
+function UBUS_GSEventCollection:Evt_ChargeSkillSuccessServer(p1) end
+---@param PartId int32
+---@param HitHP float
+---@param HitWeight int32
+function UBUS_GSEventCollection:Evt_TriggerHitInPartMultiCast(PartId, HitHP, HitWeight) end
+function UBUS_GSEventCollection:Evt_Camera_ClearCamLockServer() end
 ---@param Attacker AActor
 ---@param DeadReason DeadReason
 ---@param DmgID int32
@@ -27491,36 +27822,37 @@ function UBUS_GSEventCollection:Evt_TriggerJumpSkillMultiCast(StartJumpDir, Curr
 ---@param bIsDotDmg boolean
 ---@param AbnormalStateType AbnormalStateType
 function UBUS_GSEventCollection:Evt_UnitDead_Multicast_Invoke(Attacker, DeadReason, DmgID, StiffLevel, BeAttackedAM, EffectInstReq, bIsDotDmg, AbnormalStateType) end
-function UBUS_GSEventCollection:Evt_Camera_ClearCamLockServer() end
----@param PartId int32
----@param HitHP float
----@param HitWeight int32
-function UBUS_GSEventCollection:Evt_TriggerHitInPartMultiCast(PartId, HitHP, HitWeight) end
----@param p1 FString
-function UBUS_GSEventCollection:Evt_InputActionPressMultiCast(p1) end
 ---@param P TArray<FString>
 function UBUS_GSEventCollection:Evt_ExecuteCommandGMMultiCast(P) end
----@param p1 float
-function UBUS_GSEventCollection:Evt_RotateToTargetSvrMultiCast(p1) end
+---@param StartJumpDir SkillDirection
+---@param CurrentInput FVector2D
+function UBUS_GSEventCollection:Evt_TriggerJumpSkillMultiCast(StartJumpDir, CurrentInput) end
+---@param p1 FString
+function UBUS_GSEventCollection:Evt_InputActionPressMultiCast(p1) end
 ---@param p1 int32
 ---@param p2 int32
 function UBUS_GSEventCollection:Evt_OnlineChallengeBeginServer(p1, p2) end
+---@param PredictionKeyId int32
+function UBUS_GSEventCollection:Evt_TestPredict_Confirm_Client(PredictionKeyId) end
+---@param p1 float
+function UBUS_GSEventCollection:Evt_RotateToTargetSvrMultiCast(p1) end
+---@param p1 float
+function UBUS_GSEventCollection:Evt_StopSlotAnimationMultiCast(p1) end
 ---@param ID int32
 ---@param RuleIDList TArray<int32>
 ---@param Reason MontageBindReason
 ---@param SkillDirection SkillDirection
 ---@param bNeedCheckSkillCanCast boolean
-function UBUS_GSEventCollection:Evt_SmartCastSkillTryMultiCast(ID, RuleIDList, Reason, SkillDirection, bNeedCheckSkillCanCast) end
----@param NewTargetInfo FUnitLockTargetInfo
-function UBUS_GSEventCollection:Evt_SetTargetInfoServer_Invoke(NewTargetInfo) end
-function UBUS_GSEventCollection:Evt_TriggerPlayerRestMultiCast() end
+---@param SourceType CastSkillSourceType
+function UBUS_GSEventCollection:Evt_SmartCastSkillTryMultiCast(ID, RuleIDList, Reason, SkillDirection, bNeedCheckSkillCanCast, SourceType) end
 ---@param FinalGuid FString
 ---@param NotifyTag FGameplayTag
 function UBUS_GSEventCollection:Evt_NotifyGraphClientMultiCast(FinalGuid, NotifyTag) end
----@param PredictionKeyId int32
-function UBUS_GSEventCollection:Evt_TestPredict_Confirm_Client(PredictionKeyId) end
----@param p1 float
-function UBUS_GSEventCollection:Evt_StopSlotAnimationMultiCast(p1) end
+function UBUS_GSEventCollection:Evt_TriggerPlayerRestMultiCast() end
+---@param NewTargetInfo FUnitLockTargetInfo
+function UBUS_GSEventCollection:Evt_SetTargetInfoServer_Invoke(NewTargetInfo) end
+---@param p1 FString
+function UBUS_GSEventCollection:Evt_InputActionReleaseMultiCast(p1) end
 ---@param PredictionKeyId int32
 ---@param ParentPredictionKeyId int32
 function UBUS_GSEventCollection:Evt_TriggerRootMotionJumpServer(PredictionKeyId, ParentPredictionKeyId) end
@@ -27529,28 +27861,23 @@ function UBUS_GSEventCollection:Evt_TriggerRootMotionJumpServer(PredictionKeyId,
 ---@param Layer int32
 ---@param WithTriggerRemmoveEffect boolean
 function UBUS_GSEventCollection:Evt_BuffRemove_Multicast_Invoke(BuffID, RemoveTriggerType, Layer, WithTriggerRemmoveEffect) end
----@param p1 int32
-function UBUS_GSEventCollection:Evt_ChargeSkillSuccessMultiCast(p1) end
----@param p1 FString
-function UBUS_GSEventCollection:Evt_InputActionReleaseMultiCast(p1) end
----@param PredictionKeyId int32
-function UBUS_GSEventCollection:Evt_TestPredict_RollBack_Client(PredictionKeyId) end
 ---@param Player AActor
 ---@param DropId int32
 ---@param DropLevel int32
 function UBUS_GSEventCollection:Evt_DropCollectionItemMultiCast(Player, DropId, DropLevel) end
+---@param p1 int32
+function UBUS_GSEventCollection:Evt_ChargeSkillSuccessMultiCast(p1) end
+---@param PredictionKeyId int32
+function UBUS_GSEventCollection:Evt_TestPredict_RollBack_Client(PredictionKeyId) end
 ---@param Target AActor
 function UBUS_GSEventCollection:Evt_FinishRescueInteract_Invoke(Target) end
+function UBUS_GSEventCollection:Evt_Camera_ClearCamLockMultiCast() end
+---@param p1 int32
+function UBUS_GSEventCollection:Evt_SkillRotate_Multicast_Invoke(p1) end
 ---@param RebirthType RebirthType
 function UBUS_GSEventCollection:Evt_UnitRebirth_Multicast_Invoke(RebirthType) end
 ---@param State RebirthType
 function UBUS_GSEventCollection:Evt_RebirthTeleportFinish_Invoke(State) end
----@param p1 int32
-function UBUS_GSEventCollection:Evt_SkillRotate_Multicast_Invoke(p1) end
-function UBUS_GSEventCollection:Evt_Camera_ClearCamLockMultiCast() end
----@param p1 int32
----@param p2 int32
-function UBUS_GSEventCollection:Evt_OnlineChallengeBeginMultiCast(p1, p2) end
 ---@param Target AActor
 function UBUS_GSEventCollection:Evt_FinishRescue_Multicast_Invoke(Target) end
 ---@param Montage UAnimMontage
@@ -27561,27 +27888,24 @@ function UBUS_GSEventCollection:Evt_FinishRescue_Multicast_Invoke(Target) end
 ---@param PredictionKeyId int32
 ---@param ParentPredictionKeyId int32
 function UBUS_GSEventCollection:Evt_ClientMultiCastRPCTest2Server(Montage, PlayTimeRate, MontagePosOffset, StartSectionName, Reason, PredictionKeyId, ParentPredictionKeyId) end
----@param p1 int32
-function UBUS_GSEventCollection:Evt_RecoveryPartDamageValueServer(p1) end
 ---@param Montage UAnimMontage
 ---@param PlayTimeRate float
 ---@param MontagePosOffset float
 ---@param StartSectionName FName
 ---@param Reason MontageBindReason
 function UBUS_GSEventCollection:Evt_ClientMultiCastRPCTest1Server(Montage, PlayTimeRate, MontagePosOffset, StartSectionName, Reason) end
----@param Montage UAnimMontage
----@param PlayTimeRate float
----@param MontagePosOffset float
----@param StartSectionName FName
----@param Reason MontageBindReason
----@param PredictionKeyId int32
----@param ParentPredictionKeyId int32
-function UBUS_GSEventCollection:Evt_CastSkillWithAnimMontageServer(Montage, PlayTimeRate, MontagePosOffset, StartSectionName, Reason, PredictionKeyId, ParentPredictionKeyId) end
+---@param p1 int32
+---@param p2 int32
+function UBUS_GSEventCollection:Evt_OnlineChallengeBeginMultiCast(p1, p2) end
+---@param p1 int32
+function UBUS_GSEventCollection:Evt_RecoveryPartDamageValueServer(p1) end
 ---@param UnitState EBGUUnitState
 ---@param NeedForceUpdate boolean
 ---@param Time float
 ---@param PredictionKeyId int32
 function UBUS_GSEventCollection:Evt_UnitStatePredic_Confirm_Client(UnitState, NeedForceUpdate, Time, PredictionKeyId) end
+function UBUS_GSEventCollection:Evt_TriggerRootMotionJumpMultiCast() end
+function UBUS_GSEventCollection:Evt_GMUnitSuicide_Multicast_Invoke() end
 ---@param IsHasBuffBefore boolean
 ---@param Caster AActor
 ---@param BuffID int32
@@ -27590,13 +27914,17 @@ function UBUS_GSEventCollection:Evt_AddBuffNotify_Multicast_Invoke(IsHasBuffBefo
 ---@param RemoveTriggerType BuffEffectTriggerType
 ---@param WithTriggerRemmoveEffect boolean
 function UBUS_GSEventCollection:Evt_BuffAllRemove_Multicast_Invoke(RemoveTriggerType, WithTriggerRemmoveEffect) end
-function UBUS_GSEventCollection:Evt_GMUnitSuicide_Multicast_Invoke() end
-function UBUS_GSEventCollection:Evt_TriggerRootMotionJumpMultiCast() end
----@param UnitState EBGUUnitState
----@param NeedForceUpdate boolean
----@param Time float
+---@param Montage UAnimMontage
+---@param PlayTimeRate float
+---@param MontagePosOffset float
+---@param StartSectionName FName
+---@param Reason MontageBindReason
 ---@param PredictionKeyId int32
-function UBUS_GSEventCollection:Evt_UnitStatePredic_RollBack_Client(UnitState, NeedForceUpdate, Time, PredictionKeyId) end
+---@param ParentPredictionKeyId int32
+function UBUS_GSEventCollection:Evt_CastSkillWithAnimMontageServer(Montage, PlayTimeRate, MontagePosOffset, StartSectionName, Reason, PredictionKeyId, ParentPredictionKeyId) end
+---@param TalentID int32
+---@param ChangeLevel int32
+function UBUS_GSEventCollection:Evt_ActivateTalent_Multicast_Invoke(TalentID, ChangeLevel) end
 ---@param Attacker AActor
 ---@param SkillDamageConfig FSkillDamageConfig
 ---@param EffectInstReq FEffectInstReq
@@ -27604,10 +27932,6 @@ function UBUS_GSEventCollection:Evt_UnitStatePredic_RollBack_Client(UnitState, N
 ---@param PredictionKeyId int32
 ---@param ParentPredictionKeyId int32
 function UBUS_GSEventCollection:Evt_TriggerNormalDamageEffectServer(Attacker, SkillDamageConfig, EffectInstReq, Attacker_AttrMemData, PredictionKeyId, ParentPredictionKeyId) end
----@param Success boolean
----@param Saver AActor
----@param BeSaver AActor
-function UBUS_GSEventCollection:Evt_TriggerEndSave_Multicast_Invoke(Success, Saver, BeSaver) end
 ---@param EffectID int32
 ---@param Caster AActor
 ---@param Target AActor
@@ -27615,79 +27939,66 @@ function UBUS_GSEventCollection:Evt_TriggerEndSave_Multicast_Invoke(Success, Sav
 ---@param PredictionKeyId int32
 ---@param ParentPredictionKeyId int32
 function UBUS_GSEventCollection:Evt_TriggerSkillEffectBySkillServer(EffectID, Caster, Target, EffectInstReq, PredictionKeyId, ParentPredictionKeyId) end
----@param TalentID int32
----@param ChangeLevel int32
-function UBUS_GSEventCollection:Evt_ActivateTalent_Multicast_Invoke(TalentID, ChangeLevel) end
----@param p1 int32
-function UBUS_GSEventCollection:Evt_UnitEquipFaBao_Multicast_Invoke(p1) end
 ---@param StartJumpDir SkillDirection
 ---@param CurrentInput FVector2D
 ---@param PredictionKeyId int32
 function UBUS_GSEventCollection:Evt_TriggerJumpSkill_Confirm_Client(StartJumpDir, CurrentInput, PredictionKeyId) end
----@param Montage UAnimMontage
----@param PlayTimeRate float
----@param MontagePosOffset float
----@param StartSectionName FName
+---@param UnitState EBGUUnitState
+---@param NeedForceUpdate boolean
+---@param Time float
+---@param PredictionKeyId int32
+function UBUS_GSEventCollection:Evt_UnitStatePredic_RollBack_Client(UnitState, NeedForceUpdate, Time, PredictionKeyId) end
+---@param p1 int32
+function UBUS_GSEventCollection:Evt_UnitEquipFaBao_Multicast_Invoke(p1) end
+---@param Success boolean
+---@param Saver AActor
+---@param BeSaver AActor
+function UBUS_GSEventCollection:Evt_TriggerEndSave_Multicast_Invoke(Success, Saver, BeSaver) end
+---@param ID int32
+---@param RuleIDList TArray<int32>
 ---@param Reason MontageBindReason
-function UBUS_GSEventCollection:Evt_ClientMultiCastRPCTest1MultiCast(Montage, PlayTimeRate, MontagePosOffset, StartSectionName, Reason) end
+---@param SkillDirection SkillDirection
+---@param bNeedCheckSkillCanCast boolean
+---@param SourceType CastSkillSourceType
+---@param PredictionKeyId int32
+function UBUS_GSEventCollection:Evt_SmartCastSkillTry_Confirm_Client(ID, RuleIDList, Reason, SkillDirection, bNeedCheckSkillCanCast, SourceType, PredictionKeyId) end
+---@param TriggerId EBUStateTrigger
+---@param Time float
+---@param NeedForceUpdate boolean
+function UBUS_GSEventCollection:Evt_UnitStateTriggerCMultiCastServer(TriggerId, Time, NeedForceUpdate) end
+---@param CSI FCastSkillInfo
+---@param PredictionKeyId int32
+---@param ParentPredictionKeyId int32
+function UBUS_GSEventCollection:Evt_UnitCastSkillTryCMultiCastServer(CSI, PredictionKeyId, ParentPredictionKeyId) end
+---@param OldRoleLevel int32
+---@param NewRoleLevel int32
+function UBUS_GSEventCollection:Evt_RoleLevelChange_Multicast_Invoke(OldRoleLevel, NewRoleLevel) end
+---@param p1 int32
+function UBUS_GSEventCollection:Evt_RecoveryPartDamageValueMultiCast(p1) end
+---@param StartJumpDir SkillDirection
+---@param CurrentInput FVector2D
+---@param PredictionKeyId int32
+function UBUS_GSEventCollection:Evt_TriggerJumpSkill_RollBack_Client(StartJumpDir, CurrentInput, PredictionKeyId) end
 ---@param Montage UAnimMontage
 ---@param PlayTimeRate float
 ---@param MontagePosOffset float
 ---@param StartSectionName FName
 ---@param Reason MontageBindReason
 function UBUS_GSEventCollection:Evt_ClientMultiCastRPCTest2MultiCast(Montage, PlayTimeRate, MontagePosOffset, StartSectionName, Reason) end
----@param CSI FCastSkillInfo
----@param PredictionKeyId int32
----@param ParentPredictionKeyId int32
-function UBUS_GSEventCollection:Evt_UnitCastSkillTryCMultiCastServer(CSI, PredictionKeyId, ParentPredictionKeyId) end
----@param StartJumpDir SkillDirection
----@param CurrentInput FVector2D
----@param PredictionKeyId int32
-function UBUS_GSEventCollection:Evt_TriggerJumpSkill_RollBack_Client(StartJumpDir, CurrentInput, PredictionKeyId) end
----@param TriggerId EBUStateTrigger
----@param Time float
----@param NeedForceUpdate boolean
-function UBUS_GSEventCollection:Evt_UnitStateTriggerCMultiCastServer(TriggerId, Time, NeedForceUpdate) end
----@param p1 int32
-function UBUS_GSEventCollection:Evt_RecoveryPartDamageValueMultiCast(p1) end
----@param ID int32
----@param RuleIDList TArray<int32>
----@param Reason MontageBindReason
----@param SkillDirection SkillDirection
----@param bNeedCheckSkillCanCast boolean
----@param PredictionKeyId int32
-function UBUS_GSEventCollection:Evt_SmartCastSkillTry_Confirm_Client(ID, RuleIDList, Reason, SkillDirection, bNeedCheckSkillCanCast, PredictionKeyId) end
----@param OldRoleLevel int32
----@param NewRoleLevel int32
-function UBUS_GSEventCollection:Evt_RoleLevelChange_Multicast_Invoke(OldRoleLevel, NewRoleLevel) end
----@param ID int32
----@param RuleIDList TArray<int32>
----@param Reason MontageBindReason
----@param SkillDirection SkillDirection
----@param bNeedCheckSkillCanCast boolean
----@param PredictionKeyId int32
-function UBUS_GSEventCollection:Evt_SmartCastSkillTry_RollBack_Client(ID, RuleIDList, Reason, SkillDirection, bNeedCheckSkillCanCast, PredictionKeyId) end
----@param CSI FCastSkillInfo
-function UBUS_GSEventCollection:Evt_UnitCastSkillTry_Multicast_Invoke(CSI) end
----@param Actor1 AActor
----@param Actor2 AActor
----@param p1 int32
-function UBUS_GSEventCollection:Evt_UpdateBuffCaster_Multicast_Invoke(Actor1, Actor2, p1) end
----@param Reason EBGUBulletDestroyReason
-function UBUS_GSEventCollection:Evt_OnProjectileDead_Multicast_Invoke(Reason) end
----@param Actor AActor
-function UBUS_GSEventCollection:Evt_TriggerFallDying_Multicast_Invoke(Actor) end
----@param p1 int32
----@param p2 int32
-function UBUS_GSEventCollection:Evt_RemoveBuffNotify_Multicast_Invoke(p1, p2) end
 ---@param Montage UAnimMontage
 ---@param PlayTimeRate float
 ---@param MontagePosOffset float
 ---@param StartSectionName FName
 ---@param Reason MontageBindReason
-function UBUS_GSEventCollection:Evt_CastSkillWithAnimMontageMultiCast(Montage, PlayTimeRate, MontagePosOffset, StartSectionName, Reason) end
----@param p1 int32
-function UBUS_GSEventCollection:Evt_DeactivateTalent_Multicast_Invoke(p1) end
+function UBUS_GSEventCollection:Evt_ClientMultiCastRPCTest1MultiCast(Montage, PlayTimeRate, MontagePosOffset, StartSectionName, Reason) end
+---@param ID int32
+---@param RuleIDList TArray<int32>
+---@param Reason MontageBindReason
+---@param SkillDirection SkillDirection
+---@param bNeedCheckSkillCanCast boolean
+---@param SourceType CastSkillSourceType
+---@param PredictionKeyId int32
+function UBUS_GSEventCollection:Evt_SmartCastSkillTry_RollBack_Client(ID, RuleIDList, Reason, SkillDirection, bNeedCheckSkillCanCast, SourceType, PredictionKeyId) end
 ---@param EffectID int32
 ---@param EffectInstReq FEffectInstReq
 ---@param InnerTarget AActor
@@ -27695,35 +28006,44 @@ function UBUS_GSEventCollection:Evt_DeactivateTalent_Multicast_Invoke(p1) end
 ---@param PredictionKeyId int32
 ---@param ParentPredictionKeyId int32
 function UBUS_GSEventCollection:Evt_TriggerSkillEffect_TransmitServer(EffectID, EffectInstReq, InnerTarget, bWithRPCEvent, PredictionKeyId, ParentPredictionKeyId) end
+---@param Actor1 AActor
+---@param Actor2 AActor
+---@param p1 int32
+function UBUS_GSEventCollection:Evt_UpdateBuffCaster_Multicast_Invoke(Actor1, Actor2, p1) end
+---@param CSI FCastSkillInfo
+function UBUS_GSEventCollection:Evt_UnitCastSkillTry_Multicast_Invoke(CSI) end
+---@param p1 int32
+---@param p2 int32
+function UBUS_GSEventCollection:Evt_RemoveBuffNotify_Multicast_Invoke(p1, p2) end
+---@param p1 int32
+function UBUS_GSEventCollection:Evt_DeactivateTalent_Multicast_Invoke(p1) end
 function UBUS_GSEventCollection:Evt_UnitUnequipFaBao_Multicast_Invoke() end
----@param NewTransform FTransform
----@param bSweep boolean
----@param bTeleport boolean
-function UBUS_GSEventCollection:Evt_SetActorTransform_Multicast_Invoke(NewTransform, bSweep, bTeleport) end
----@param Attacker AActor
----@param SkillDamageConfig FSkillDamageConfig
----@param EffectInstReq FEffectInstReq
----@param Attacker_AttrMemData FBattleAttrSnapShot
-function UBUS_GSEventCollection:Evt_TriggerNormalDamageEffectMultiCast(Attacker, SkillDamageConfig, EffectInstReq, Attacker_AttrMemData) end
----@param Target AActor
-function UBUS_GSEventCollection:Evt_TriggrtInteractOnOtherClientServer(Target) end
+---@param Actor AActor
+function UBUS_GSEventCollection:Evt_TriggerFallDying_Multicast_Invoke(Actor) end
+---@param Montage UAnimMontage
+---@param PlayTimeRate float
+---@param MontagePosOffset float
+---@param StartSectionName FName
+---@param Reason MontageBindReason
+function UBUS_GSEventCollection:Evt_CastSkillWithAnimMontageMultiCast(Montage, PlayTimeRate, MontagePosOffset, StartSectionName, Reason) end
+---@param Reason EBGUBulletDestroyReason
+function UBUS_GSEventCollection:Evt_OnProjectileDead_Multicast_Invoke(Reason) end
 ---@param EffectID int32
 ---@param Caster AActor
 ---@param Target AActor
 ---@param EffectInstReq FEffectInstReq
 function UBUS_GSEventCollection:Evt_TriggerSkillEffectBySkillMultiCast(EffectID, Caster, Target, EffectInstReq) end
-function UBUS_GSEventCollection:Evt_TriggerGainKeyItem_Multicast_Invoke() end
----@param NewLocation FVector
+---@param NewTransform FTransform
 ---@param bSweep boolean
 ---@param bTeleport boolean
-function UBUS_GSEventCollection:Evt_SetActorLocationGM_Multicast_Invoke(NewLocation, bSweep, bTeleport) end
----@param BuffID int32
----@param Duration float
----@param BuffSourceType BuffSourceType
----@param Caster AActor
-function UBUS_GSEventCollection:Evt_BuffInstsDictOnAdd_Multicast_Invoke(BuffID, Duration, BuffSourceType, Caster) end
----@param RebirthType RebirthType
-function UBUS_GSEventCollection:Evt_UnitRebirth_ByItem_Multicast_Invoke(RebirthType) end
+function UBUS_GSEventCollection:Evt_SetActorTransform_Multicast_Invoke(NewTransform, bSweep, bTeleport) end
+---@param Target AActor
+function UBUS_GSEventCollection:Evt_TriggrtInteractOnOtherClientServer(Target) end
+---@param Attacker AActor
+---@param SkillDamageConfig FSkillDamageConfig
+---@param EffectInstReq FEffectInstReq
+---@param Attacker_AttrMemData FBattleAttrSnapShot
+function UBUS_GSEventCollection:Evt_TriggerNormalDamageEffectMultiCast(Attacker, SkillDamageConfig, EffectInstReq, Attacker_AttrMemData) end
 ---@param Montage UAnimMontage
 ---@param Scale float
 ---@param PlayTimeRate float
@@ -27733,17 +28053,27 @@ function UBUS_GSEventCollection:Evt_UnitRebirth_ByItem_Multicast_Invoke(RebirthT
 ---@param PredictionKeyId int32
 ---@param ParentPredictionKeyId int32
 function UBUS_GSEventCollection:Evt_MoveWithAnimMontageCMultiCastServer(Montage, Scale, PlayTimeRate, MontagePosOffset, StartSectionName, Reason, PredictionKeyId, ParentPredictionKeyId) end
+---@param CSI FCastSkillInfo
+function UBUS_GSEventCollection:Evt_UnitCastSkillTryCMultiCastMultiCast(CSI) end
+function UBUS_GSEventCollection:Evt_TriggerGainKeyItem_Multicast_Invoke() end
+---@param RebirthType RebirthType
+function UBUS_GSEventCollection:Evt_UnitRebirth_ByItem_Multicast_Invoke(RebirthType) end
+---@param NewLocation FVector
+---@param bSweep boolean
+---@param bTeleport boolean
+function UBUS_GSEventCollection:Evt_SetActorLocationGM_Multicast_Invoke(NewLocation, bSweep, bTeleport) end
 ---@param TriggerId EBUStateTrigger
 ---@param Time float
 ---@param NeedForceUpdate boolean
 function UBUS_GSEventCollection:Evt_UnitStateTriggerCMultiCastMultiCast(TriggerId, Time, NeedForceUpdate) end
----@param CSI FCastSkillInfo
-function UBUS_GSEventCollection:Evt_UnitCastSkillTryCMultiCastMultiCast(CSI) end
+---@param BuffID int32
+---@param Duration float
+---@param BuffSourceType BuffSourceType
+---@param Caster AActor
+function UBUS_GSEventCollection:Evt_BuffInstsDictOnAdd_Multicast_Invoke(BuffID, Duration, BuffSourceType, Caster) end
 ---@param EquipPosition EquipPosition
 ---@param EquipID int32
 function UBUS_GSEventCollection:Evt_InitDaShenEquipData_Multicast_Invoke(EquipPosition, EquipID) end
----@param PredictionKeyId int32
-function UBUS_GSEventCollection:Evt_TriggerRootMotionJump_Confirm_Client(PredictionKeyId) end
 ---@param Montage UAnimMontage
 ---@param Scale float
 ---@param PlayTimeRate float
@@ -27751,16 +28081,18 @@ function UBUS_GSEventCollection:Evt_TriggerRootMotionJump_Confirm_Client(Predict
 ---@param StartSectionName FName
 ---@param Reason MontageBindReason
 function UBUS_GSEventCollection:Evt_MoveWithAnimMontage_Multicast_Invoke(Montage, Scale, PlayTimeRate, MontagePosOffset, StartSectionName, Reason) end
----@param RebirthPointConfigID int32
----@param TeleportReason TeleportReason
-function UBUS_GSEventCollection:Evt_TeleportWithRebirthPointFailedServer(RebirthPointConfigID, TeleportReason) end
+---@param p1 boolean
+function UBUS_GSEventCollection:Evt_SwitchNoInteraction_Multicast_Invoke(p1) end
 ---@param EffectID int32
 ---@param EffectInstReq FEffectInstReq
 ---@param InnerTarget AActor
 ---@param bWithRPCEvent boolean
 function UBUS_GSEventCollection:Evt_TriggerSkillEffect_TransmitMultiCast(EffectID, EffectInstReq, InnerTarget, bWithRPCEvent) end
----@param p1 boolean
-function UBUS_GSEventCollection:Evt_SwitchNoInteraction_Multicast_Invoke(p1) end
+---@param RebirthPointConfigID int32
+---@param TeleportReason TeleportReason
+function UBUS_GSEventCollection:Evt_TeleportWithRebirthPointFailedServer(RebirthPointConfigID, TeleportReason) end
+---@param PredictionKeyId int32
+function UBUS_GSEventCollection:Evt_TriggerRootMotionJump_Confirm_Client(PredictionKeyId) end
 ---@param PredictionKeyId int32
 function UBUS_GSEventCollection:Evt_TriggerRootMotionJump_RollBack_Client(PredictionKeyId) end
 ---@param p1 int32
@@ -27770,26 +28102,25 @@ function UBUS_GSEventCollection:Evt_OnIncreaseMaxPELevel_Multicast_Invoke(p1) en
 function UBUS_GSEventCollection:Evt_InteractGroup_Update_Multicast_Invoke(GroupId, InteractUnitState) end
 ---@param Target AActor
 function UBUS_GSEventCollection:Evt_TriggrtInteractOnOtherClientMultiCast(Target) end
----@param Montage UAnimMontage
----@param Scale float
----@param PlayTimeRate float
----@param MontagePosOffset float
----@param StartSectionName FName
----@param Reason MontageBindReason
-function UBUS_GSEventCollection:Evt_MoveWithAnimMontageCMultiCastMultiCast(Montage, Scale, PlayTimeRate, MontagePosOffset, StartSectionName, Reason) end
-function UBUS_GSEventCollection:Evt_TriggerResetAllActors_Multicast_Invoke() end
+---@param AttrID EBGUAttrFloat
+---@param IncreaseValue float
+function UBUS_GSEventCollection:Evt_FTB_IncreaseAttrFloat_Multicast_Invoke(AttrID, IncreaseValue) end
 ---@param BulletDispReason EBGUBulletDispReason
 ---@param EffectInstReq FEffectInstReq
 ---@param BeHitActor AActor
 function UBUS_GSEventCollection:Evt_SpawnBulletFXByReason_Multicast_Invoke(BulletDispReason, EffectInstReq, BeHitActor) end
 ---@param p1 boolean
 function UBUS_GSEventCollection:Evt_ShouledUpdateBuffTime_Multicast_Invoke(p1) end
+---@param TargetActor AActor
+---@param turnSpeed float
+function UBUS_GSEventCollection:Evt_SkillRotateTraceActor_Multicast_Invoke(TargetActor, turnSpeed) end
+function UBUS_GSEventCollection:Evt_TriggerResetAllActors_Multicast_Invoke() end
+---@param p1 int32
+function UBUS_GSEventCollection:Evt_BuffInstsDictOnRemove_Multicast_Invoke(p1) end
 ---@param BuffID int32
 ---@param RemoveTriggerType BuffEffectTriggerType
 ---@param WithTriggerRemmoveEffect boolean
 function UBUS_GSEventCollection:Evt_BuffRemoveImmediately_Multicast_Invoke(BuffID, RemoveTriggerType, WithTriggerRemmoveEffect) end
----@param p1 int32
-function UBUS_GSEventCollection:Evt_BuffInstsDictOnRemove_Multicast_Invoke(p1) end
 ---@param Montage UAnimMontage
 ---@param PlayTimeRate float
 ---@param MontagePosOffset float
@@ -27797,12 +28128,13 @@ function UBUS_GSEventCollection:Evt_BuffInstsDictOnRemove_Multicast_Invoke(p1) e
 ---@param Reason MontageBindReason
 ---@param PredictionKeyId int32
 function UBUS_GSEventCollection:Evt_ClientMultiCastRPCTest2_Confirm_Client(Montage, PlayTimeRate, MontagePosOffset, StartSectionName, Reason, PredictionKeyId) end
----@param TargetActor AActor
----@param turnSpeed float
-function UBUS_GSEventCollection:Evt_SkillRotateTraceActor_Multicast_Invoke(TargetActor, turnSpeed) end
----@param AttrID EBGUAttrFloat
----@param IncreaseValue float
-function UBUS_GSEventCollection:Evt_FTB_IncreaseAttrFloat_Multicast_Invoke(AttrID, IncreaseValue) end
+---@param Montage UAnimMontage
+---@param Scale float
+---@param PlayTimeRate float
+---@param MontagePosOffset float
+---@param StartSectionName FName
+---@param Reason MontageBindReason
+function UBUS_GSEventCollection:Evt_MoveWithAnimMontageCMultiCastMultiCast(Montage, Scale, PlayTimeRate, MontagePosOffset, StartSectionName, Reason) end
 ---@param Montage UAnimMontage
 ---@param PlayTimeRate float
 ---@param MontagePosOffset float
@@ -27810,17 +28142,8 @@ function UBUS_GSEventCollection:Evt_FTB_IncreaseAttrFloat_Multicast_Invoke(AttrI
 ---@param Reason MontageBindReason
 ---@param PredictionKeyId int32
 function UBUS_GSEventCollection:Evt_ClientMultiCastRPCTest2_RollBack_Client(Montage, PlayTimeRate, MontagePosOffset, StartSectionName, Reason, PredictionKeyId) end
----@param p1 int32
-function UBUS_GSEventCollection:Evt_OnlineChallengeEndToUI_Multicast_Invoke(p1) end
----@param Montage UAnimMontage
----@param PlayTimeRate float
----@param MontagePosOffset float
----@param StartSectionName FName
----@param Reason MontageBindReason
----@param PredictionKeyId int32
----@param ParentPredictionKeyId int32
----@param __TriggerActor AActor
-function UBUS_GSEventCollection:Evt_ClientMultiCastRPCTest2SPTransmitServer(Montage, PlayTimeRate, MontagePosOffset, StartSectionName, Reason, PredictionKeyId, ParentPredictionKeyId, __TriggerActor) end
+---@param Tag FGameplayTag
+function UBUS_GSEventCollection:Evt_SceneObjTransitByEvent_Multicast_Invoke(Tag) end
 ---@param EquipPosition EquipPosition
 ---@param EquipID int32
 function UBUS_GSEventCollection:Evt_BattleLogicChangeEquip_Multicast_Invoke(EquipPosition, EquipID) end
@@ -27830,25 +28153,22 @@ function UBUS_GSEventCollection:Evt_BattleLogicChangeEquip_Multicast_Invoke(Equi
 ---@param StartSectionName FName
 ---@param Reason MontageBindReason
 ---@param PredictionKeyId int32
+---@param ParentPredictionKeyId int32
+---@param __TriggerActor AActor
+function UBUS_GSEventCollection:Evt_ClientMultiCastRPCTest2SPTransmitServer(Montage, PlayTimeRate, MontagePosOffset, StartSectionName, Reason, PredictionKeyId, ParentPredictionKeyId, __TriggerActor) end
+---@param Montage UAnimMontage
+---@param PlayTimeRate float
+---@param MontagePosOffset float
+---@param StartSectionName FName
+---@param Reason MontageBindReason
+---@param PredictionKeyId int32
 function UBUS_GSEventCollection:Evt_CastSkillWithAnimMontage_Confirm_Client(Montage, PlayTimeRate, MontagePosOffset, StartSectionName, Reason, PredictionKeyId) end
+---@param p1 int32
+function UBUS_GSEventCollection:Evt_OnlineChallengeEndToUI_Multicast_Invoke(p1) end
 ---@param RebirthPointConfigID int32
 ---@param TeleportReason TeleportReason
 function UBUS_GSEventCollection:Evt_TeleportWithRebirthPointFailedMultiCast(RebirthPointConfigID, TeleportReason) end
----@param Tag FGameplayTag
-function UBUS_GSEventCollection:Evt_SceneObjTransitByEvent_Multicast_Invoke(Tag) end
 function UBUS_GSEventCollection:Evt_OnClientBeginPlayReqForInitEquip_Invoke() end
----@param EffectID int32
----@param Caster AActor
----@param Target AActor
----@param EffectInstReq FEffectInstReq
----@param PredictionKeyId int32
-function UBUS_GSEventCollection:Evt_TriggerSkillEffectBySkill_Confirm_Client(EffectID, Caster, Target, EffectInstReq, PredictionKeyId) end
----@param Attacker AActor
----@param SkillDamageConfig FSkillDamageConfig
----@param EffectInstReq FEffectInstReq
----@param Attacker_AttrMemData FBattleAttrSnapShot
----@param PredictionKeyId int32
-function UBUS_GSEventCollection:Evt_TriggerNormalDamageEffect_Confirm_Client(Attacker, SkillDamageConfig, EffectInstReq, Attacker_AttrMemData, PredictionKeyId) end
 ---@param Montage UAnimMontage
 ---@param PlayTimeRate float
 ---@param MontagePosOffset float
@@ -27856,28 +28176,25 @@ function UBUS_GSEventCollection:Evt_TriggerNormalDamageEffect_Confirm_Client(Att
 ---@param Reason MontageBindReason
 ---@param PredictionKeyId int32
 function UBUS_GSEventCollection:Evt_CastSkillWithAnimMontage_RollBack_Client(Montage, PlayTimeRate, MontagePosOffset, StartSectionName, Reason, PredictionKeyId) end
+---@param Attacker AActor
+---@param SkillDamageConfig FSkillDamageConfig
+---@param EffectInstReq FEffectInstReq
+---@param Attacker_AttrMemData FBattleAttrSnapShot
+---@param PredictionKeyId int32
+function UBUS_GSEventCollection:Evt_TriggerNormalDamageEffect_Confirm_Client(Attacker, SkillDamageConfig, EffectInstReq, Attacker_AttrMemData, PredictionKeyId) end
+---@param EffectID int32
+---@param Caster AActor
+---@param Target AActor
+---@param EffectInstReq FEffectInstReq
+---@param PredictionKeyId int32
+function UBUS_GSEventCollection:Evt_TriggerSkillEffectBySkill_Confirm_Client(EffectID, Caster, Target, EffectInstReq, PredictionKeyId) end
+function UBUS_GSEventCollection:Evt_RelieveImmobilizedClient_Multicast_Invoke() end
 ---@param EffectID int32
 ---@param Caster AActor
 ---@param Target AActor
 ---@param EffectInstReq FEffectInstReq
 ---@param PredictionKeyId int32
 function UBUS_GSEventCollection:Evt_TriggerSkillEffectBySkill_RollBack_Client(EffectID, Caster, Target, EffectInstReq, PredictionKeyId) end
----@param CSI FCastSkillInfo
----@param PredictionKeyId int32
-function UBUS_GSEventCollection:Evt_UnitCastSkillTryCMultiCast_Confirm_Client(CSI, PredictionKeyId) end
----@param Attacker AActor
----@param SkillDamageConfig FSkillDamageConfig
----@param EffectInstReq FEffectInstReq
----@param Attacker_AttrMemData FBattleAttrSnapShot
----@param PredictionKeyId int32
-function UBUS_GSEventCollection:Evt_TriggerNormalDamageEffect_RollBack_Client(Attacker, SkillDamageConfig, EffectInstReq, Attacker_AttrMemData, PredictionKeyId) end
-function UBUS_GSEventCollection:Evt_RelieveImmobilizedClient_Multicast_Invoke() end
----@param BuffID int32
----@param Target AActor
----@param EffectIdx int32
----@param EffectInstReq FEffectInstReq
----@param bIsPeriodical boolean
-function UBUS_GSEventCollection:Evt_TriggerSkillEffectByBuff_Multicast_Invoke(BuffID, Target, EffectIdx, EffectInstReq, bIsPeriodical) end
 ---@param Attacker AActor
 ---@param SkillDamageConfig FSkillDamageConfig
 ---@param EffectInstReq FEffectInstReq
@@ -27886,26 +28203,41 @@ function UBUS_GSEventCollection:Evt_TriggerSkillEffectByBuff_Multicast_Invoke(Bu
 ---@param ParentPredictionKeyId int32
 ---@param __TriggerActor AActor
 function UBUS_GSEventCollection:Evt_TriggerNormalDamageEffectSPTransmitServer(Attacker, SkillDamageConfig, EffectInstReq, Attacker_AttrMemData, PredictionKeyId, ParentPredictionKeyId, __TriggerActor) end
+---@param Attacker AActor
+---@param SkillDamageConfig FSkillDamageConfig
+---@param EffectInstReq FEffectInstReq
+---@param Attacker_AttrMemData FBattleAttrSnapShot
+---@param PredictionKeyId int32
+function UBUS_GSEventCollection:Evt_TriggerNormalDamageEffect_RollBack_Client(Attacker, SkillDamageConfig, EffectInstReq, Attacker_AttrMemData, PredictionKeyId) end
+---@param p1 int32
+---@param p2 int32
+function UBUS_GSEventCollection:Evt_OnlineChallengeBeginToUI_Multicast_Invoke(p1, p2) end
+---@param BuffID int32
+---@param Target AActor
+---@param EffectIdx int32
+---@param EffectInstReq FEffectInstReq
+---@param bIsPeriodical boolean
+function UBUS_GSEventCollection:Evt_TriggerSkillEffectByBuff_Multicast_Invoke(BuffID, Target, EffectIdx, EffectInstReq, bIsPeriodical) end
+---@param CSI FCastSkillInfo
+---@param PredictionKeyId int32
+function UBUS_GSEventCollection:Evt_UnitCastSkillTryCMultiCast_Confirm_Client(CSI, PredictionKeyId) end
 ---@param BuffID int32
 ---@param Layer_OldValue int32
 ---@param Layer_NewValue int32
 function UBUS_GSEventCollection:Evt_OnBuffLayerChangedNotify_Multicast_Invoke(BuffID, Layer_OldValue, Layer_NewValue) end
----@param p1 int32
----@param p2 int32
-function UBUS_GSEventCollection:Evt_OnlineChallengeBeginToUI_Multicast_Invoke(p1, p2) end
+---@param MMState State_MM
+function UBUS_GSEventCollection:Evt_ChangeMotionMatchingState_Multicast_Invoke(MMState) end
+---@param CSI FCastSkillInfo
+---@param PredictionKeyId int32
+function UBUS_GSEventCollection:Evt_UnitCastSkillTryCMultiCast_RollBack_Client(CSI, PredictionKeyId) end
 ---@param EffectID int32
 ---@param EffectInstReq FEffectInstReq
 ---@param InnerTarget AActor
 ---@param bWithRPCEvent boolean
 ---@param PredictionKeyId int32
 function UBUS_GSEventCollection:Evt_TriggerSkillEffect_Transmit_Confirm_Client(EffectID, EffectInstReq, InnerTarget, bWithRPCEvent, PredictionKeyId) end
----@param MMState State_MM
-function UBUS_GSEventCollection:Evt_ChangeMotionMatchingState_Multicast_Invoke(MMState) end
 ---@param p1 FString
 function UBUS_GSEventCollection:Evt_ChallenegeRebirthTeleport_Multicast_Invoke(p1) end
----@param CSI FCastSkillInfo
----@param PredictionKeyId int32
-function UBUS_GSEventCollection:Evt_UnitCastSkillTryCMultiCast_RollBack_Client(CSI, PredictionKeyId) end
 ---@param Montage UAnimMontage
 ---@param PlayTimeRate float
 ---@param MontagePosOffset float
@@ -27913,8 +28245,6 @@ function UBUS_GSEventCollection:Evt_UnitCastSkillTryCMultiCast_RollBack_Client(C
 ---@param Reason MontageBindReason
 ---@param __TriggerActor AActor
 function UBUS_GSEventCollection:Evt_ClientMultiCastRPCTest2SPTransmitMultiCast(Montage, PlayTimeRate, MontagePosOffset, StartSectionName, Reason, __TriggerActor) end
----@param NewTargetInfo FUnitLockTargetInfo
-function UBUS_GSEventCollection:Evt_SetTargetInfoWithCameraLockingServer_Invoke(NewTargetInfo) end
 ---@param EffectID int32
 ---@param EffectInstReq FEffectInstReq
 ---@param InnerTarget AActor
@@ -27929,12 +28259,8 @@ function UBUS_GSEventCollection:Evt_TriggerSkillEffect_TransmitSPTransmitServer(
 ---@param bWithRPCEvent boolean
 ---@param PredictionKeyId int32
 function UBUS_GSEventCollection:Evt_TriggerSkillEffect_Transmit_RollBack_Client(EffectID, EffectInstReq, InnerTarget, bWithRPCEvent, PredictionKeyId) end
----@param Attacker AActor
----@param SkillDamageConfig FSkillDamageConfig
----@param EffectInstReq FEffectInstReq
----@param Attacker_AttrMemData FBattleAttrSnapShot
----@param __TriggerActor AActor
-function UBUS_GSEventCollection:Evt_TriggerNormalDamageEffectSPTransmitMultiCast(Attacker, SkillDamageConfig, EffectInstReq, Attacker_AttrMemData, __TriggerActor) end
+---@param NewTargetInfo FUnitLockTargetInfo
+function UBUS_GSEventCollection:Evt_SetTargetInfoWithCameraLockingServer_Invoke(NewTargetInfo) end
 ---@param Montage UAnimMontage
 ---@param Scale float
 ---@param PlayTimeRate float
@@ -27943,6 +28269,13 @@ function UBUS_GSEventCollection:Evt_TriggerNormalDamageEffectSPTransmitMultiCast
 ---@param Reason MontageBindReason
 ---@param PredictionKeyId int32
 function UBUS_GSEventCollection:Evt_MoveWithAnimMontageCMultiCast_Confirm_Client(Montage, Scale, PlayTimeRate, MontagePosOffset, StartSectionName, Reason, PredictionKeyId) end
+---@param Attacker AActor
+---@param SkillDamageConfig FSkillDamageConfig
+---@param EffectInstReq FEffectInstReq
+---@param Attacker_AttrMemData FBattleAttrSnapShot
+---@param __TriggerActor AActor
+function UBUS_GSEventCollection:Evt_TriggerNormalDamageEffectSPTransmitMultiCast(Attacker, SkillDamageConfig, EffectInstReq, Attacker_AttrMemData, __TriggerActor) end
+function UBUS_GSEventCollection:Evt_TestEventCollectionMultiCast_Multicast_Invoke() end
 ---@param Montage UAnimMontage
 ---@param Scale float
 ---@param PlayTimeRate float
@@ -27951,7 +28284,6 @@ function UBUS_GSEventCollection:Evt_MoveWithAnimMontageCMultiCast_Confirm_Client
 ---@param Reason MontageBindReason
 ---@param PredictionKeyId int32
 function UBUS_GSEventCollection:Evt_MoveWithAnimMontageCMultiCast_RollBack_Client(Montage, Scale, PlayTimeRate, MontagePosOffset, StartSectionName, Reason, PredictionKeyId) end
-function UBUS_GSEventCollection:Evt_TestEventCollectionMultiCast_Multicast_Invoke() end
 ---@param AMScaleType EAMScaleType
 ---@param AMScaleAxis EAMScaleRateAxis
 ---@param LandingTraceLength float
@@ -27967,13 +28299,13 @@ function UBUS_GSEventCollection:Evt_TestEventCollectionMultiCast_Multicast_Invok
 ---@param AMScaleMoveOffset float
 ---@param AMScaleMoveOffsetZ float
 function UBUS_GSEventCollection:Evt_SetAMScaleRateByPosMultiCast_Multicast_Invoke(AMScaleType, AMScaleAxis, LandingTraceLength, PureScaleValue, CachedDataID, AttackRangeLimit, DebugMode, TotalDuration, NotifyBeginTime, NotifyEndTime, AMScaleMinRate, AMScaleMaxRate, AMScaleMoveOffset, AMScaleMoveOffsetZ) end
+function UBUS_GSEventCollection:Evt_BattleLogicResetEquipIllusion_Multicast_Invoke() end
 ---@param EffectID int32
 ---@param EffectInstReq FEffectInstReq
 ---@param InnerTarget AActor
 ---@param bWithRPCEvent boolean
 ---@param __TriggerActor AActor
 function UBUS_GSEventCollection:Evt_TriggerSkillEffect_TransmitSPTransmitMultiCast(EffectID, EffectInstReq, InnerTarget, bWithRPCEvent, __TriggerActor) end
-function UBUS_GSEventCollection:Evt_BattleLogicResetEquipIllusion_Multicast_Invoke() end
 ---@param EquipIllusionConfigPath FString
 function UBUS_GSEventCollection:Evt_BattleLogicChangeEquipIllusion_Multicast_Invoke(EquipIllusionConfigPath) end
 ---@param Montage UAnimMontage
@@ -27986,6 +28318,8 @@ function UBUS_GSEventCollection:Evt_BattleLogicChangeEquipIllusion_Multicast_Inv
 function UBUS_GSEventCollection:Evt_ClientMultiCastRPCTest2_SPTransmitConfirm_Client(Montage, PlayTimeRate, MontagePosOffset, StartSectionName, Reason, PredictionKeyId, __TriggerActor) end
 ---@param p1 int32
 function UBUS_GSEventCollection:Evt_TestEventCollectionIntMultiCast_Multicast_Invoke(p1) end
+---@param p1 FName
+function UBUS_GSEventCollection:Evt_TestEventCollectionNameMultiCast_Multicast_Invoke(p1) end
 ---@param Montage UAnimMontage
 ---@param PlayTimeRate float
 ---@param MontagePosOffset float
@@ -27994,12 +28328,8 @@ function UBUS_GSEventCollection:Evt_TestEventCollectionIntMultiCast_Multicast_In
 ---@param PredictionKeyId int32
 ---@param __TriggerActor AActor
 function UBUS_GSEventCollection:Evt_ClientMultiCastRPCTest2_SPTransmitRollBack_Client(Montage, PlayTimeRate, MontagePosOffset, StartSectionName, Reason, PredictionKeyId, __TriggerActor) end
----@param p1 FName
-function UBUS_GSEventCollection:Evt_TestEventCollectionNameMultiCast_Multicast_Invoke(p1) end
 ---@param p1 float
 function UBUS_GSEventCollection:Evt_TestEventCollectionFloatMultiCast_Multicast_Invoke(p1) end
----@param Actor AActor
-function UBUS_GSEventCollection:Evt_TestEventCollectionActorMultiCast_Multicast_Invoke(Actor) end
 ---@param Attacker AActor
 ---@param SkillDamageConfig FSkillDamageConfig
 ---@param EffectInstReq FEffectInstReq
@@ -28009,8 +28339,12 @@ function UBUS_GSEventCollection:Evt_TestEventCollectionActorMultiCast_Multicast_
 function UBUS_GSEventCollection:Evt_TriggerNormalDamageEffect_SPTransmitConfirm_Client(Attacker, SkillDamageConfig, EffectInstReq, Attacker_AttrMemData, PredictionKeyId, __TriggerActor) end
 ---@param Tag FGameplayTag
 function UBUS_GSEventCollection:Evt_SceneObjTransitByEventNoSaveState_Multicast_Invoke(Tag) end
----@param Object UObject
-function UBUS_GSEventCollection:Evt_TestEventCollectionObjectMultiCast_Multicast_Invoke(Object) end
+---@param Actor AActor
+function UBUS_GSEventCollection:Evt_TestEventCollectionActorMultiCast_Multicast_Invoke(Actor) end
+---@param p1 FString
+function UBUS_GSEventCollection:Evt_TestEventCollectionStringMultiCast_Multicast_Invoke(p1) end
+---@param Vector FVector
+function UBUS_GSEventCollection:Evt_TestEventCollectionVectorMultiCast_Multicast_Invoke(Vector) end
 ---@param Attacker AActor
 ---@param SkillDamageConfig FSkillDamageConfig
 ---@param EffectInstReq FEffectInstReq
@@ -28018,10 +28352,8 @@ function UBUS_GSEventCollection:Evt_TestEventCollectionObjectMultiCast_Multicast
 ---@param PredictionKeyId int32
 ---@param __TriggerActor AActor
 function UBUS_GSEventCollection:Evt_TriggerNormalDamageEffect_SPTransmitRollBack_Client(Attacker, SkillDamageConfig, EffectInstReq, Attacker_AttrMemData, PredictionKeyId, __TriggerActor) end
----@param p1 FString
-function UBUS_GSEventCollection:Evt_TestEventCollectionStringMultiCast_Multicast_Invoke(p1) end
----@param Vector FVector
-function UBUS_GSEventCollection:Evt_TestEventCollectionVectorMultiCast_Multicast_Invoke(Vector) end
+---@param Object UObject
+function UBUS_GSEventCollection:Evt_TestEventCollectionObjectMultiCast_Multicast_Invoke(Object) end
 ---@param EffectID int32
 ---@param EffectInstReq FEffectInstReq
 ---@param InnerTarget AActor
@@ -28567,6 +28899,10 @@ UBUS_PlayerCameraSystem = {}
 UBUS_PlayerDataComp = {}
 
 
+---@class UBUS_PlayerMovementSystem : UBUS_MovementSystem
+UBUS_PlayerMovementSystem = {}
+
+
 ---@class UBUS_ProceduralEnvInteractionConfigComp : UActorEditCompBase
 ---@field bEnableDecal boolean
 ---@field bEnableMesh boolean
@@ -28707,6 +29043,7 @@ function UBUS_ProjectileBaseDataComp:LateECSBeginPlay() end
 ---@field DisableAbilityMask FProjectileDisableAbilityMask
 ---@field bForceUseProjectileMovementComp boolean
 ---@field bNotify_SpawnFinished boolean
+---@field bEnable_DBCComp boolean
 UBUS_ProjectileConfigInfoComp = {}
 
 
@@ -29427,6 +29764,32 @@ function UBgmVolumeFunctionBinder:OnCollisionEndOverlap(OverlappedComponent, Oth
 ---@param bFromSweep boolean
 ---@param SweepResult FHitResult
 function UBgmVolumeFunctionBinder:OnCollisionBeginOverlap(OverlappedComponent, OtherActor, OtherComp, OtherBodyIndex, bFromSweep, SweepResult) end
+
+
+---@class UBossRushLevelConfig : UBGWObjectExtend
+---@field ConfigGuid FCalliopeGuid
+---@field PersistentLevelAssetName FString
+---@field PersistentLevelLongPackageName FString
+---@field PersistentLevel FString
+---@field LevelNamePrefix FString
+---@field bRefreshLevelList boolean
+---@field SubLevelList TArray<FString>
+---@field BossRushLevelsLoadSetting TMap<FString, FBossRushLevelState>
+---@field GeometryLevelsLoadSetting TMap<FString, FBossRushLevelState>
+---@field OtherLevelsLoadSetting TMap<FString, FBossRushLevelState>
+---@field SeqLevelsLoadSetting TMap<FString, FBossRushLevelState>
+---@field ItemLevelsLoadSetting TMap<FString, FBossRushLevelState>
+---@field LightLevelsLoadSetting TMap<FString, FBossRushLevelState>
+---@field SupportLevelsLoadSetting TMap<FString, FBossRushLevelState>
+---@field MonsterLevelsLoadSetting TMap<FString, FBossRushLevelState>
+---@field bFixBRLevelTransactionalActors boolean
+---@field bSetAllBRLevelLayer boolean
+---@field bCheckTamerPlaceLevel boolean
+UBossRushLevelConfig = {}
+
+---@param MemberName FString
+---@param PropertyName FString
+function UBossRushLevelConfig:OnPropertyChanged(MemberName, PropertyName) end
 
 
 ---@class UCacheAssetReference : UObject
@@ -30700,6 +31063,7 @@ function UGSEventCollectionBase:InitializeCS() end
 ---@field DebugPhaseCSG boolean
 ---@field IsOpenBattleInfoTool boolean
 ---@field CancelSkillCD boolean
+---@field DebugMap boolean
 ---@field ShowChrEnvMaskValue boolean
 ---@field IsOpenRemoteTestCheat boolean
 ---@field IsIgnoreValidateData boolean
@@ -30736,6 +31100,8 @@ function UGSEventCollectionBase:InitializeCS() end
 ---@field EnablePlaneMoveMode boolean
 ---@field DebugPlayerGuide boolean
 ---@field DebugNewGamePlusGuide boolean
+---@field DebugBossRushGuide boolean
+---@field DebugMapGuide boolean
 ---@field DebugDonutAudio boolean
 ---@field IsOverSeaChannel boolean
 ---@field EnableEncrypt boolean
@@ -30793,6 +31159,7 @@ function UGSEventCollectionBase:InitializeCS() end
 ---@field UITickProfileLevel int32
 ---@field CollectionForceType int32
 ---@field LockDesiredPlayerHP int32
+---@field FSRCrashOptions int32
 ---@field Demo820PlayCountMax int32
 ---@field CricketBattleModeType int32
 ---@field LoadingMaxTime int32
@@ -30883,6 +31250,14 @@ UGSMapAreaBaseData = {}
 ---@class UGSMapAreaDetailData : UDataAsset
 ---@field MapAreaData TMap<int32, uint8>
 UGSMapAreaDetailData = {}
+
+
+
+---@class UGSMapAreaSpriteData : UDataAsset
+---@field Widght int32
+---@field Height int32
+---@field MapSpriteData TMap<int32, uint8>
+UGSMapAreaSpriteData = {}
 
 
 
